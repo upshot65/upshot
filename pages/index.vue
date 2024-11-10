@@ -1,13 +1,13 @@
+<script setup></script>
+
 <template>
-    <div>
-      <ComingSoon/>
-    </div>
+  <div>
+    <HeroSection />
+    <FeaturedArticles />
+    <LatestNews />>
+    <PopularCategories />
+    <Subscribe />
+  </div>
 </template>
 
-<script setup >
-
-</script>
-
-<style scoped>
-
-</style>
+<style lang="scss" scoped></style>
