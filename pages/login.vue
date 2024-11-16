@@ -1,11 +1,14 @@
 <template>
   <div class="flex flex-col lg:flex-row min-h-screen bg-gray-100">
     <!-- Left section for logo -->
-    <div
-      class="flex-1 bg-gray-200 flex items-center justify-center p-6 lg:p-12"
-    >
+    <div class="flex-1">
       <!-- Placeholder for logo/image -->
-      <div class="w-full max-w-xs h-64 bg-gray-300"></div>
+      <!-- <div class="w-full max-w-xs h-64 bg-gray-300"></div> -->
+      <NuxtImg
+        src="/images/auth-left.png"
+        alt="Hero Background"
+        class="w-full h-full"
+      />
     </div>
 
     <!-- Right section for login form -->

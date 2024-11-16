@@ -1,61 +1,74 @@
 <template>
-  <div class="max-w-7xl mx-auto p-6">
-    <!-- Category Header with Image and Category List -->
-    <!-- Category Header with Image and Category List Overlayed -->
-    <section class="relative mb-8 rounded-lg overflow-hidden">
-      <!-- Category Image -->
-      <NuxtImg
-        :src="selectedCategory.image_url"
-        alt="Category Image"
-        class="w-full h-64 object-cover"
-      />
+  <section class="category-section">
+    <div class="max-w-7xl mx-auto p-6">
+      <!-- Category Header with Image and Category List -->
+      <!-- Category Header with Image and Category List Overlayed -->
+      <section class="relative mb-8 rounded-lg overflow-hidden">
+        <!-- Category Image -->
+        <NuxtImg
+          :src="selectedCategory.image_url"
+          alt="Category Image"
+          class="w-full h-64 object-cover"
+        />
 
-      <!-- Category List Overlay -->
-      <div
-        class="absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/40 to-transparent p-4"
-      >
-        <div class="flex gap-3 overflow-x-auto">
-          <button
-            v-for="cat in interests"
-            :key="cat.id"
-            @click="selectCategory(cat)"
-            :class="[
-              'px-4 py-2 rounded-full text-sm font-medium',
-              selectedCategory?.id === cat.id
-                ? 'bg-lime-500 text-white'
-                : 'bg-gray-200 text-gray-700',
-            ]"
-          >
-            {{ cat.name }}
-          </button>
+        <!-- Category List Overlay -->
+        <div
+          class="absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/40 to-transparent p-4"
+        >
+          <div class="flex gap-3 overflow-x-auto">
+            <button
+              v-for="cat in interests"
+              :key="cat.id"
+              @click="selectCategory(cat)"
+              :class="[
+                'px-4 py-2 rounded-full text-sm font-medium',
+                selectedCategory?.id === cat.id
+                  ? 'bg-lime-500 text-white'
+                  : 'bg-gray-200 text-gray-700',
+              ]"
+            >
+              {{ cat.name }}
+            </button>
+          </div>
         </div>
+      </section>
+
+      <!-- Articles List -->
+      <section class="space-y-6">
+        <ArticleCard
+          v-for="article in articles"
+          :key="article.id"
+          :image="article.image"
+          :title="article.title"
+          :description="article.description"
+          :datePosted="article.datePosted"
+          :articleId="article.id"
+        />
+      </section>
+
+      <!-- Show More Button -->
+      <div v-if="hasMoreArticles" class="flex justify-center mt-8">
+        <button
+          @click="loadMoreArticles"
+          class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
+          style="background-color: #004aac"
+        >
+          Show More ^
+        </button>
       </div>
-    </section>
-
-    <!-- Articles List -->
-    <section class="space-y-6">
-      <ArticleCard
-        v-for="article in articles"
-        :key="article.id"
-        :image="article.image"
-        :title="article.title"
-        :description="article.description"
-        :datePosted="article.datePosted"
-        :articleId="article.id"
-      />
-    </section>
-
-    <!-- Show More Button -->
-    <div v-if="hasMoreArticles" class="flex justify-center mt-8">
-      <button
-        @click="loadMoreArticles"
-        class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
-        style="background-color: #004aac"
-      >
-        Show More ^
-      </button>
     </div>
-  </div>
+
+    <NuxtImg
+      src="/images/green-star-right.png"
+      alt="Hero Background"
+      class="green-star-right-image"
+    />
+    <NuxtImg
+      src="/images/dark-green-star-left.png"
+      alt="Hero Background"
+      class="dark-green-star-left-image"
+    />
+  </section>
 </template>
 
 <script setup>
@@ -136,5 +149,23 @@ const selectCategory = (category) => {
 </script>
 
 <style scoped>
-/* Add responsive styles if needed */
+.category-section {
+  position: relative;
+}
+.green-star-right-image {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  z-index: -1;
+  width: 242px;
+  object-fit: cover;
+}
+.dark-green-star-left-image {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  z-index: -1;
+  width: 200px;
+  object-fit: cover;
+}
 </style>

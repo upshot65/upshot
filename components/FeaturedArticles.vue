@@ -1,57 +1,58 @@
 <!-- components/FeaturedArticles.vue -->
 <template>
-  <div class="w-full max-w-7xl mx-auto relative">
-    <h2 class="text-2xl font-bold text-blue-900 mb-6 px-4">
-      Featured Articles
-    </h2>
+  <section class="featured-section-main">
+    <div class="w-full max-w-7xl mx-auto relative">
+      <h2 class="text-2xl font-bold text-blue-900 mb-6 px-4">
+        Featured Articles
+      </h2>
 
-    <div class="relative">
-      <!-- Outer container with hidden overflow -->
-      <div class="overflow-hidden px-4">
-        <!-- Inner scrollable container -->
-        <div
-          ref="sliderContainer"
-          class="flex -mx-2 transition-transform duration-500 ease-in-out"
-          :style="{ transform: `translateX(-${scrollPosition}px)` }"
-        >
+      <div class="relative">
+        <!-- Outer container with hidden overflow -->
+        <div class="overflow-hidden px-4">
+          <!-- Inner scrollable container -->
           <div
-            v-for="article in articles"
-            :key="article.id"
-            class="max-w-10 md:max-w-[380px] px-2 flex-shrink-0"
+            ref="sliderContainer"
+            class="flex -mx-2 transition-transform duration-500 ease-in-out"
+            :style="{ transform: `translateX(-${scrollPosition}px)` }"
           >
-            <div class="bg-white rounded-lg overflow-hidden h-full">
-              <NuxtImg
-                :src="article.image"
-                :alt="article.title"
-                class="w-full h-48 object-cover rounded-xl"
-              />
-              <div class="p-4">
-                <h3 class="text-xl font-bold text-gray-900 mb-2">
-                  {{ article.title }}
-                </h3>
-                <p class="text-gray-600 text-sm line-clamp-2">
-                  {{ article.description }}
-                </p>
+            <div
+              v-for="article in articles"
+              :key="article.id"
+              class="max-w-10 md:max-w-[380px] px-2 flex-shrink-0"
+            >
+              <div class="bg-white rounded-lg overflow-hidden h-full">
+                <NuxtImg
+                  :src="article.image"
+                  :alt="article.title"
+                  class="w-full h-48 object-cover rounded-xl"
+                />
+                <div class="p-4">
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">
+                    {{ article.title }}
+                  </h3>
+                  <p class="text-gray-600 text-sm line-clamp-2">
+                    {{ article.description }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Navigation Dots -->
-      <div class="flex justify-center mt-6 gap-2">
-        <button
-          v-for="index in totalDots"
-          :key="index"
-          @click="goToSlide(index - 1)"
-          class="w-3 h-3 rounded-full transition-colors duration-200"
-          :class="currentDot === index - 1 ? 'bg-green-500' : 'bg-gray-300'"
-          :aria-label="`Go to slide ${index}`"
-        />
-      </div>
+        <!-- Navigation Dots -->
+        <div class="flex justify-center mt-6 gap-2">
+          <button
+            v-for="index in totalDots"
+            :key="index"
+            @click="goToSlide(index - 1)"
+            class="w-3 h-3 rounded-full transition-colors duration-200"
+            :class="currentDot === index - 1 ? 'bg-green-500' : 'bg-gray-300'"
+            :aria-label="`Go to slide ${index}`"
+          />
+        </div>
 
-      <!-- Navigation Arrows -->
-      <!-- <button
+        <!-- Navigation Arrows -->
+        <!-- <button
         v-show="canScrollPrev"
         @click="prevSlide"
         class="absolute left-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white rounded-full p-2 shadow-lg z-10"
@@ -72,7 +73,7 @@
         </svg>
       </button> -->
 
-      <!-- <button
+        <!-- <button
         v-show="canScrollNext"
         @click="nextSlide"
         class="absolute right-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white rounded-full p-2 shadow-lg z-10"
@@ -92,8 +93,14 @@
           />
         </svg>
       </button> -->
+      </div>
     </div>
-  </div>
+    <NuxtImg
+      src="/images/blue-bg-right.png"
+      alt="Hero Background"
+      class="featured-section-main-image"
+    />
+  </section>
 </template>
 <script setup>
 const articles = ref([
@@ -246,5 +253,18 @@ const updateCurrentDot = (position) => {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.featured-section-main {
+  position: relative;
+  padding-top: 100px;
+  margin: 30px 0;
+}
+.featured-section-main-image {
+  position: absolute;
+  top: 0;
+  right: 60px;
+  z-index: -1;
+  width: 270px;
+  object-fit: cover;
 }
 </style>

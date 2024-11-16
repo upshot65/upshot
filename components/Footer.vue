@@ -1,5 +1,8 @@
 <template>
-  <footer class="text-gray-700 py-10 px-6" style="background-color: #f1eded">
+  <footer
+    class="text-gray-700 py-10 px-6 mt-20 footer-section"
+    style="background-color: #f1eded"
+  >
     <div
       class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between space-y-10 md:space-y-0"
     >
@@ -139,6 +142,11 @@
     >
       © Copyright 2024, All Rights Reserved
     </div>
+    <NuxtImg
+      src="/images/blue-footer-start.png"
+      alt="Hero Background"
+      class="footer-section-image"
+    />
   </footer>
 </template>
 
@@ -174,5 +182,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Additional styling if needed */
+.footer-section {
+  position: relative;
+  padding-top: 130px;
+  /* margin: 30px 0; */
+}
+.footer-section-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  width: 270px;
+  object-fit: cover;
+}
 </style>
