@@ -86,10 +86,6 @@ const defaultCategory =
 const selectedCategory = ref(defaultCategory);
 
 console.log("----selectedCategory---", selectedCategory.value);
-// const categoryImage = computed(
-//   () => selectCategory.value && selectCategory.value.image_url
-// );
-// console.log("----categoryImage---", categoryImage.value);
 
 const articles = ref([]);
 const articlesPerPage = 10;
@@ -100,7 +96,7 @@ const hasMoreArticles = ref(true);
 const fetchArticles = async () => {
   try {
     isLoading.value = true;
-    console.log("---making api call again---");
+    console.log("---making api call again---", selectedCategory.value.id);
     const data = await $fetch("/api/articles", {
       params: {
         categoryId: selectedCategory.value.id,
@@ -122,52 +118,46 @@ const fetchArticles = async () => {
   }
 };
 
-watch(
-  selectedCategory,
-  (newCategory) => {
-    if (newCategory) {
-      articles.value = []; // Clear articles before fetching
-      currentPage.value = 1; // Reset pagination
-      hasMoreArticles.value = true; // Reset the "has more" flag
-      fetchArticles(); // Make the API call on change
-    } else {
-      results.value = []; // Clear results if query is empty
-    }
+watchEffect(() => {
+  if (selectedCategory.value) {
+    fetchArticles();
   }
-  // { immediate: true }
-);
-// Server-side data fetching for initial articles
-const { data: initialArticles } = useAsyncData(
-  `${selectedCategory.value.id}_articles`,
-  async () => {
-    console.log("------getting callled--");
-    const result = await $fetch(`/api/articles`, {
+});
+
+const loadMoreArticles = async () => {
+  if (!hasMoreArticles.value) return;
+
+  try {
+    // isLoading.value = true;
+    currentPage.value += 1;
+
+    const response = await $fetch("/api/articles", {
       params: {
         categoryId: selectedCategory.value.id,
-        page: 1,
+        page: currentPage.value,
         limit: articlesPerPage,
       },
     });
-    return result;
-  },
-  { immediate: true }
-);
 
-console.log("-----data--articles--", initialArticles._value.articles);
+    if (response.articles.length < articlesPerPage) {
+      hasMoreArticles.value = false;
+    }
 
-articles.value = initialArticles._value.articles || [];
-
-// Function to load more articles
-const loadMoreArticles = () => {
-  currentPage.value += 1;
-  fetchArticles();
+    articles.value.push(...response.articles);
+  } catch (error) {
+    console.error("Error loading more articles:", error);
+  } finally {
+    // isLoading.value = false;
+  }
 };
 
-// Function to handle category selection
+// Handle category selection
 const selectCategory = (category) => {
   if (selectedCategory.value.id !== category.id) {
-    selectedCategory.value = { ...category }; // Replace with a new object
-    // fetchArticles();
+    selectedCategory.value = category;
+    currentPage.value = 1;
+    hasMoreArticles.value = true;
+    articles.value = [];
   }
 };
 </script>
