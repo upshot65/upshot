@@ -19,7 +19,7 @@
         <ArticleCard
           v-for="article in articles"
           :key="article.id"
-          :image="article.image"
+          :image="article.header_image"
           :title="article.title"
           :description="article.description"
           :datePosted="article.datePosted"
