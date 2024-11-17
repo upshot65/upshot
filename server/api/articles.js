@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   const supabase = await serverSupabaseClient(event);
   // Fetch articles from Supabase
   const { data: articles, error } = await supabase
-    .from("articles")
+    .from("article")
     .select("*")
     .eq("category_id", categoryId)
     .range(offset, offset + limitNum - 1);
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
   // Check if there are more articles available
   const { count: totalArticles } = await supabase
-    .from("articles")
+    .from("article")
     .select("*", { count: "exact", head: true })
     .eq("category_id", categoryId);
 
