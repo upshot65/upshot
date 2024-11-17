@@ -1,11 +1,5 @@
 // server/api/profile.js
-
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
+import { serverSupabaseClient } from "#supabase/server";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   //   const { userId, instagram_url, interests } = body;
@@ -24,6 +18,8 @@ export default defineEventHandler(async (event) => {
     return { statusCode: 400, body: { message: "User ID is required" } };
   }
 
+    const supabase = await serverSupabaseClient(event);
+  
   // Insert profile data
   const { error: profileError } = await supabase.from("user_profile").upsert({
     user_id: userId,
