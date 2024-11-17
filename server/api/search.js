@@ -1,5 +1,5 @@
 // server/api/search.js
-
+import { serverSupabaseClient } from "#supabase/server";
 export default defineEventHandler(async (event) => {
   const { query, categoryId, page = 1, limit = 10 } = getQuery(event);
 
