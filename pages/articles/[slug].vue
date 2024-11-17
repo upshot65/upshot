@@ -128,75 +128,53 @@
 
     <!-- Related Posts Section -->
     <div class="mt-8">
-      <h3 class="text-2xl font-semibold">Related Posts:</h3>
-      <div v-if="relatedLoading" class="skeleton-loader">Loading...</div>
-      <div
-        v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4"
-      >
-        <ArticleCard
-          v-for="related in relatedArticles"
-          :key="related.id"
-          :article="related"
-        />
+      <h2 class="text-2xl font-bold text-blue-900 mb-6">Related Posts:</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <RelatedArticle :articleId="articleId" :categoryId="categoryId" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+// Extract route params
 const route = useRoute();
-// const articleId = route.params.id;
 const slug = route.params.slug;
+const articleId = ref(slug.split("-")[0]); // Extract article ID from slug
+const categoryId = ref(1); // Extract article ID from slug
+// Define reactive variables
+const article = ref({});
 
-console.log("---slug---", slug);
-// Extract the article ID from the slug (before the first dash)
-const articleId = ref(slug.split("-")[0]);
-console.log("---articleId---", articleId.value);
-const categoryId = route.params.category_id; // Category ID passed via route
-// console.log("---categoryId---", categoryId.value);
-// Fetch article data on the server side for SEO benefits
+// Fetch article data and related posts
+// const { data: response, error } = await useAsyncData(
+//   `article-${articleId.value}`,
+//   () =>
+//     $fetch(`/api/articles/${articleId.value}`, {
+//       params: { includeRelated: true },
+//     }),
+//   { immediate: true, key: `article-${articleId.value}` }
+// );
+
 const { data: response, error } = await useFetch(
   `/api/articles/${articleId.value}`,
   {
     server: true,
+    key: `article-${articleId.value}`,
   }
 );
 
-const article = ref({});
-
-if (error.value) {
-  console.error("Failed to fetch article:", error.value);
-} else {
-  // Access the article data
-  article.value = response.value.article;
-
-  console.log("Article data:", article.value);
-  console.log("Article image:", article.value.header_image);
+// Assign fetched data
+if (!error.value && response?.value) {
+  console.log("----response.value.article---", response.value.article);
+  article.value = response.value.article || {};
 }
-// Fetch related articles based on category ID (we already have categoryId from route)
-const relatedArticles = ref(null);
-const relatedLoading = ref(false);
 
 // Compute article URL based on the current route
 const articleUrl = computed(() => {
   const baseUrl = window?.location?.origin || "https:upshotmedia.com";
-  return `${baseUrl}/articles/${articleId.value}`;
+  return `${baseUrl}/articles/${slug}`;
 });
-
-// onMounted(async () => {
-//   try {
-//     relatedLoading.value = true;
-//     const { data } = await useFetch(
-//       `/api/articles/related?category=${categoryId}`
-//     );
-//     relatedArticles.value = data.value;
-//   } catch (error) {
-//     console.error("Failed to fetch related articles:", error);
-//   } finally {
-//     relatedLoading.value = false;
-//   }
-// });
 
 // Set SEO meta tags using `useHead`
 useHead({
