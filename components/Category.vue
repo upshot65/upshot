@@ -38,7 +38,7 @@
         <ArticleCard
           v-for="article in articles"
           :key="article.id"
-          :image="article.image"
+          :image="article.header_image"
           :title="article.title"
           :description="article.description"
           :datePosted="article.datePosted"
@@ -102,7 +102,8 @@ const fetchArticles = async () => {
       limit: articlesPerPage,
     },
   });
-
+  console.log("-----data----", data);
+  console.log("-----error----", error);
   if (error) {
     console.error("Error fetching articles:", error);
     return;
@@ -114,21 +115,32 @@ const fetchArticles = async () => {
   articles.value.push(...data.articles);
 };
 
+watch(selectedCategory, (newCategory) => {
+  if (newCategory) {
+    fetchArticles(); // Make the API call on change
+  } else {
+    results.value = []; // Clear results if query is empty
+  }
+});
 // Server-side data fetching for initial articles
 const { data: initialArticles } = useAsyncData(
-  "articles",
-  () =>
-    $fetch(`/api/articles`, {
+  `${selectedCategory.value.id}_articles`,
+  async () => {
+    const result = await $fetch(`/api/articles`, {
       params: {
         categoryId: selectedCategory.value.id,
         page: 1,
         limit: articlesPerPage,
       },
-    }),
+    });
+    return result;
+  },
   { immediate: true }
 );
 
-articles.value = initialArticles?.articles || [];
+console.log("-----data--articles--", initialArticles._value.articles);
+
+articles.value = initialArticles._value.articles || [];
 
 // Function to load more articles
 const loadMoreArticles = () => {
