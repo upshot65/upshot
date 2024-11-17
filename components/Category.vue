@@ -34,7 +34,7 @@
       </section>
 
       <!-- Articles List -->
-      <section class="space-y-6">
+      <section v-if="!isLoading" class="space-y-6">
         <ArticleCard
           v-for="article in articles"
           :key="article.id"
@@ -45,6 +45,9 @@
           :articleId="article.id"
         />
       </section>
+
+      <!-- Loading State -->
+      <div v-else class="text-center py-4">Loading...</div>
 
       <!-- Show More Button -->
       <div v-if="hasMoreArticles" class="flex justify-center mt-8">
@@ -74,7 +77,7 @@
 <script setup>
 // Get interests from the useState ("interests")
 const interests = useState("interests");
-
+const isLoading = ref(false); // Track loading state
 // Default to "Technology" category or first available category
 const defaultCategory =
   interests.value?.find((cat) => cat.name === "Technology") ||
@@ -95,37 +98,49 @@ const hasMoreArticles = ref(true);
 
 // Fetch articles for the selected category
 const fetchArticles = async () => {
-  const { data, error } = await $fetch(`/api/articles`, {
-    params: {
-      categoryId: selectedCategory.value.id,
-      page: currentPage.value,
-      limit: articlesPerPage,
-    },
-  });
-  console.log("-----data----", data);
-  console.log("-----error----", error);
-  if (error) {
-    console.error("Error fetching articles:", error);
-    return;
-  }
+  try {
+    isLoading.value = true;
+    console.log("---making api call again---");
+    const data = await $fetch("/api/articles", {
+      params: {
+        categoryId: selectedCategory.value.id,
+        page: currentPage.value,
+        limit: articlesPerPage,
+      },
+    });
 
-  if (data.articles.length < articlesPerPage) {
-    hasMoreArticles.value = false;
+    console.log("-----data----", data);
+
+    if (data.articles.length < articlesPerPage) {
+      hasMoreArticles.value = false;
+    }
+    articles.value.push(...data.articles);
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+  } finally {
+    isLoading.value = false;
   }
-  articles.value.push(...data.articles);
 };
 
-watch(selectedCategory, (newCategory) => {
-  if (newCategory) {
-    fetchArticles(); // Make the API call on change
-  } else {
-    results.value = []; // Clear results if query is empty
+watch(
+  selectedCategory,
+  (newCategory) => {
+    if (newCategory) {
+      articles.value = []; // Clear articles before fetching
+      currentPage.value = 1; // Reset pagination
+      hasMoreArticles.value = true; // Reset the "has more" flag
+      fetchArticles(); // Make the API call on change
+    } else {
+      results.value = []; // Clear results if query is empty
+    }
   }
-});
+  // { immediate: true }
+);
 // Server-side data fetching for initial articles
 const { data: initialArticles } = useAsyncData(
   `${selectedCategory.value.id}_articles`,
   async () => {
+    console.log("------getting callled--");
     const result = await $fetch(`/api/articles`, {
       params: {
         categoryId: selectedCategory.value.id,
@@ -151,11 +166,8 @@ const loadMoreArticles = () => {
 // Function to handle category selection
 const selectCategory = (category) => {
   if (selectedCategory.value.id !== category.id) {
-    selectedCategory.value = category;
-    articles.value = [];
-    currentPage.value = 1;
-    hasMoreArticles.value = true;
-    fetchArticles();
+    selectedCategory.value = { ...category }; // Replace with a new object
+    // fetchArticles();
   }
 };
 </script>
