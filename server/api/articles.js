@@ -1,5 +1,5 @@
 // server/api/articles.js
-
+import { serverSupabaseClient } from "#supabase/server";
 export default defineEventHandler(async (event) => {
   // Get the query parameters
   const { categoryId, page = 1, limit = 10 } = getQuery(event);
