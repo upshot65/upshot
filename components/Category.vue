@@ -30,6 +30,17 @@
               {{ cat.name }}
             </button>
           </div>
+          <div class="hidden sm:block">
+            <div
+              class="w-10 h-10 rounded-full bg-lime-500 flex justify-center ml-3 cursor-pointer"
+            >
+              <NuxtImg
+                src="/images/category-menu-arrow.svg"
+                alt="Hero Background"
+                class="w-2"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

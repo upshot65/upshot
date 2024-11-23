@@ -191,8 +191,15 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50% , -50%);
+  transform: translate(-50%, -50%);
   width: 270px;
   object-fit: cover;
 }
+
+@media screen and (max-width  : 768px) {
+  .footer-section-image{
+    width: 150px;
+  }
+}
+
 </style>

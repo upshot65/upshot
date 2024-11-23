@@ -18,7 +18,7 @@
             <div
               v-for="article in articles"
               :key="article.id"
-              class="max-w-10 md:max-w-[380px] px-2 flex-shrink-0"
+              class="w-full md:max-w-[380px] px-2 flex-shrink-0"
             >
               <div class="bg-white rounded-lg overflow-hidden h-full">
                 <NuxtImg
@@ -266,5 +266,13 @@ const updateCurrentDot = (position) => {
   z-index: -1;
   width: 270px;
   object-fit: cover;
+}
+@media screen and (max-width : 768px) {
+  .featured-section-main {
+    padding: 0 !important;
+  }
+  .featured-section-main-image{
+    display: none !important;
+  }
 }
 </style>

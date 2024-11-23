@@ -25,6 +25,13 @@
   position: relative;
 }
 
+@media screen and (max-width : 425px) {
+  .hero-section {
+    background-image: url("/hero/landing-mobile-hero-bg.png") !important;
+    height: 60vh !important;
+  }
+}
+
 .hero-content-heading {
   position: absolute;
   top: 20%;

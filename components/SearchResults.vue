@@ -147,4 +147,13 @@ const goToPage = (page) => {
   width: 200px;
   object-fit: cover;
 }
+
+@media screen and (max-width : 768px) {
+  .green-star-right-image {
+    display: none !important;
+  }
+  .dark-green-star-left-image {
+    display: none !important;
+  }
+}
 </style>
