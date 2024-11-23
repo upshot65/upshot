@@ -5,7 +5,8 @@
 
     <!-- Main Content Section -->
     <main class="flex-grow bg-white-100 py-8 px-6">
-      <div class="max-w-7xl mx-auto">
+      <!-- class="max-w-7xl mx-auto" -->
+      <div>
         <slot />
       </div>
     </main>

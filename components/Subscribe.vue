@@ -2,7 +2,7 @@
   <div class="flex justify-center items-center py-10 px-2 md:px-4 lg:px-8">
     <!-- Main container with background color and rounded corners -->
     <div
-      class="bg-blue-800 text-white max-w-3xl w-full p-6 md:p-8 lg:p-10 rounded-2xl relative flex flex-col space-y-6 items-center"
+      class="bg-blue-800 text-white max-w-6xl w-full p-6 md:p-8 lg:p-10 rounded-2xl relative flex flex-col space-y-6 items-center"
     >
       <!-- White Decorative Strips -->
       <div class="absolute top-0 left-0 w-8 h-8 rounded-br-full bg-white"></div>
