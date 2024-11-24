@@ -25,7 +25,7 @@
               >
                 <div class="bg-white rounded-lg overflow-hidden h-full">
                   <NuxtImg
-                    :src="article.image"
+                    :src="article.header_image"
                     :alt="article.title"
                     class="w-full h-48 object-cover rounded-xl"
                   />
