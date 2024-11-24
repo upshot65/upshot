@@ -18,8 +18,8 @@
           <div class="flex gap-3 overflow-x-auto">
             <button
               v-for="cat in categoriesWithLatest"
-              :key="cat.category.id"
-              @click="selectCategory(cat.category)"
+              :key="cat?.category.id"
+              @click="selectCategory(cat?.category)"
               :class="[
                 'px-4 py-2 rounded-full text-sm font-medium',
                 selectedCategory?.id === cat.category.id
@@ -52,7 +52,7 @@
           :image="article.header_image"
           :title="article.title"
           :description="article.description"
-          :datePosted="article.datePosted"
+          :datePosted="article.created_at"
           :articleId="article.id"
         />
       </section>
