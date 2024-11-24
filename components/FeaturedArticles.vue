@@ -16,25 +16,29 @@
             :style="{ transform: `translateX(-${scrollPosition}px)` }"
           >
             <div
-              v-for="article in articles"
+              v-for="article in featuredArticles"
               :key="article.id"
               class="w-full md:max-w-[380px] px-2 flex-shrink-0"
             >
-              <div class="bg-white rounded-lg overflow-hidden h-full">
-                <NuxtImg
-                  :src="article.image"
-                  :alt="article.title"
-                  class="w-full h-48 object-cover rounded-xl"
-                />
-                <div class="p-4">
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">
-                    {{ article.title }}
-                  </h3>
-                  <p class="text-gray-600 text-sm line-clamp-2">
-                    {{ article.description }}
-                  </p>
+              <NuxtLink
+                :to="`/articles/${article.id}-${generateSlug(article.title)}`"
+              >
+                <div class="bg-white rounded-lg overflow-hidden h-full">
+                  <NuxtImg
+                    :src="article.image"
+                    :alt="article.title"
+                    class="w-full h-48 object-cover rounded-xl"
+                  />
+                  <div class="p-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">
+                      {{ article.title }}
+                    </h3>
+                    <p class="text-gray-600 text-sm line-clamp-2">
+                      {{ article.description }}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -103,77 +107,18 @@
   </section>
 </template>
 <script setup>
-const articles = ref([
-  {
-    id: 1,
-    title: "LinkedIn removes its top voice batches from collab. articles",
-    description:
-      'LinkedIn has announced that it\'s retiring its "Top Voice" badges for contributing to Collaborative Articles, which, seemingly, has been one of...',
-    image: "/featured/1.png",
-  },
-  {
-    id: 2,
-    title: "Rosemary: Health benefits, precautions & drug interactions",
-    description:
-      "Rosemary has long been popular for its flavor and scent, but it is also rich in iron, calcium, and vitamin B6, as well as antioxidants and...",
-    image: "/featured/2.png",
-  },
-  {
-    id: 3,
-    title: "Mystery of the Milky Way's most bizarre supernova",
-    description:
-      'In the year 1181, a "guest star" was recorded in the constellation of Cassiopeia. Its modern supernova remnant is weirder...',
-    image: "/featured/3.png",
-  },
-  {
-    id: 4,
-    title: "New Discoveries in Deep Space",
-    description:
-      "Recent telescopic observations have revealed unprecedented details about distant galaxies...",
-    image: "/featured/1.png",
-  },
-  {
-    id: 5,
-    title: "Advances in Quantum Computing",
-    description:
-      "Scientists have made a breakthrough in quantum computing that could revolutionize...",
-    image: "/featured/2.png",
-  },
-  {
-    id: 6,
-    title: "The Future of AI Technology",
-    description:
-      "Exploring the latest developments in artificial intelligence and their potential impact...",
-    image: "/featured/3.png",
-  },
-  {
-    id: 4,
-    title: "New Discoveries in Deep Space",
-    description:
-      "Recent telescopic observations have revealed unprecedented details about distant galaxies...",
-    image: "/featured/2.png",
-  },
-  {
-    id: 5,
-    title: "Advances in Quantum Computing",
-    description:
-      "Scientists have made a breakthrough in quantum computing that could revolutionize...",
-    image: "/featured/2.png",
-  },
-  {
-    id: 6,
-    title: "The Future of AI Technology",
-    description:
-      "Exploring the latest developments in artificial intelligence and their potential impact...",
-    image: "/featured/2.png",
-  },
-]);
+// Access the store
+const articleStore = useArticleStore();
+const { featuredArticles } = storeToRefs(articleStore);
+
+console.log(featuredArticles.value);
+
 const sliderContainer = ref(null);
 const scrollPosition = ref(0);
 const currentDot = ref(0);
 const containerWidth = ref(0);
 const slideWidth = ref(0);
-
+const { generateSlug } = useSlug();
 // Computed properties for navigation
 const canScrollPrev = computed(() => scrollPosition.value > 0);
 const canScrollNext = computed(() => {
@@ -182,7 +127,7 @@ const canScrollNext = computed(() => {
 
 const maxScroll = computed(() => {
   if (!containerWidth.value) return 0;
-  const totalWidth = articles.value.length * slideWidth.value;
+  const totalWidth = featuredArticles.value.length * slideWidth.value;
   return Math.max(0, totalWidth - containerWidth.value);
 });
 
@@ -190,7 +135,7 @@ const maxScroll = computed(() => {
 const totalDots = computed(() => {
   if (!containerWidth.value) return 1;
   const slidesPerView = Math.floor(containerWidth.value / slideWidth.value);
-  return Math.ceil((articles.value.length - slidesPerView) / 1) + 1;
+  return Math.ceil((featuredArticles.value.length - slidesPerView) / 1) + 1;
 });
 
 // Initialize and handle resize
@@ -267,11 +212,11 @@ const updateCurrentDot = (position) => {
   width: 270px;
   object-fit: cover;
 }
-@media screen and (max-width : 768px) {
+@media screen and (max-width: 768px) {
   .featured-section-main {
     padding: 0 !important;
   }
-  .featured-section-main-image{
+  .featured-section-main-image {
     display: none !important;
   }
 }
