@@ -114,7 +114,7 @@ const fetchArticles = useDebounceFn(async () => {
       },
     });
 
-    console.log(--fetchedArticles--${query.value}, fetchedArticles);
+    console.log(`--fetchedArticles--${query.value}`, fetchedArticles);
     articles.value = fetchedArticles || [];
     totalArticles.value = total || 0;
   } catch (error) {
