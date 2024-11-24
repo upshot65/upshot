@@ -18,7 +18,9 @@
       <p class="text-gray-700 mt-2">
         {{ description }}
       </p>
-      <p class="text-gray-500 mt-4 text-sm">Date posted: {{ datePosted }}</p>
+      <p class="text-gray-500 mt-4 text-sm">
+        Date posted: {{ formatDate(datePosted) }}
+      </p>
     </NuxtLink>
   </div>
 </template>
@@ -38,7 +40,7 @@ const props = defineProps({
     required: true,
   },
   datePosted: {
-    type: String,
+    type: Date,
     required: true,
   },
   articleId: {
@@ -46,6 +48,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const { formatDate } = useFormatDate();
 
 // Compute a slugified version of the title for SEO-friendly URLs
 const slugTitle = computed(() => {
