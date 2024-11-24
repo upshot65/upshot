@@ -196,10 +196,9 @@ onMounted(() => {
   object-fit: cover;
 }
 
-@media screen and (max-width  : 768px) {
-  .footer-section-image{
+@media screen and (max-width: 768px) {
+  .footer-section-image {
     width: 150px;
   }
 }
-
 </style>
