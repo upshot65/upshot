@@ -130,9 +130,9 @@
     <div class="mt-8">
       <h2 class="text-2xl font-bold text-blue-900 mb-6">Related Posts:</h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+      <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4"> -->
         <RelatedArticle :articleId="articleId" :categoryId="categoryId" />
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
