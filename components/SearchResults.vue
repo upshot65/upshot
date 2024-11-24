@@ -10,6 +10,7 @@
           v-for="(suggestion, index) in suggestions"
           :key="index"
           class="px-3 py-1 bg-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-300"
+          @click="setQuery(suggestion)"
         >
           {{ suggestion }}
         </span>
@@ -22,7 +23,7 @@
           :image="article.header_image"
           :title="article.title"
           :description="article.description"
-          :datePosted="article.datePosted"
+          :datePosted="article.created_at"
           :articleId="article.id"
         />
       </div>
@@ -75,6 +76,8 @@
 </template>
 
 <script setup>
+import { useDebounceFn } from "@vueuse/core";
+
 // Suggestions (static for now)
 const suggestions = ref([
   "User Interface Design",
@@ -83,11 +86,11 @@ const suggestions = ref([
   "Accessibility",
   "Web Design",
 ]);
+
 const route = useRoute();
+const router = useRouter();
+
 const query = computed(() => route.query.q || "");
-
-const params = computed(() => route.params.p || "");
-
 const currentPage = ref(1);
 const articlesPerPage = 5;
 const totalArticles = ref(0);
@@ -96,34 +99,48 @@ const totalArticles = ref(0);
 const totalPages = computed(() =>
   Math.ceil(totalArticles.value / articlesPerPage)
 );
-// Fetch articles based on search query
-// Fetch articles and total count using useAsyncData
-const { data: articlesData, refresh: fetchArticles } = useAsyncData(
-  "articles",
-  () =>
-    $fetch(`/api/search`, {
+
+const articles = ref([]);
+
+// Debounced fetchArticles function
+const fetchArticles = useDebounceFn(async () => {
+  if (!query.value) return;
+  try {
+    const { articles: fetchedArticles, total } = await $fetch("/api/search", {
       params: {
         query: query.value,
         page: currentPage.value,
         limit: articlesPerPage,
       },
-    }),
+    });
+
+    console.log(--fetchedArticles--${query.value}, fetchedArticles);
+    articles.value = fetchedArticles || [];
+    totalArticles.value = total || 0;
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+  }
+}, 300); // Debounce time: 300ms
+
+// Watch query and page for changes
+watch(
+  [query, currentPage],
+  () => {
+    fetchArticles();
+  },
   { immediate: true }
 );
-// const { data: articlesData } = useAsyncData("articles", () =>
-//   $fetch(`/api/articles`, { params: { query: query.value, page: 1, limit: 5 } })
-// );
-
-// Retrieve articles from the async data
-const articles = computed(() => articlesData.value?.articles || []);
-totalArticles.value = articlesData.value?.total || 0;
 
 // Change page and re-fetch data
 const goToPage = (page) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
-    fetchArticles(); // re-fetch articles for the new page
   }
+};
+
+// Set query from suggestions
+const setQuery = (suggestedQuery) => {
+  router.push({ query: { q: suggestedQuery } });
 };
 </script>
 
@@ -148,7 +165,7 @@ const goToPage = (page) => {
   object-fit: cover;
 }
 
-@media screen and (max-width : 768px) {
+@media screen and (max-width: 768px) {
   .green-star-right-image {
     display: none !important;
   }
