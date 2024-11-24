@@ -16,7 +16,7 @@
           >
             <div class="relative">
               <NuxtImg
-                :src="article.image"
+                :src="article.header_image"
                 :alt="article.title"
                 sizes="100vw sm:50vw md:400px"
                 class="w-full h-80 object-cover rounded-xl"
