@@ -6,12 +6,14 @@
       <!-- Articles Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div
-          v-for="(article, index) in articles"
+          v-for="(article, index) in latestArticles"
           :key="index"
           :class="index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''"
           class="bg-white overflow-hidden"
         >
-          <NuxtLink>
+          <NuxtLink
+            :to="`/articles/${article.id}-${generateSlug(article.title)}`"
+          >
             <div class="relative">
               <NuxtImg
                 :src="article.image"
@@ -27,7 +29,7 @@
                 class="absolute top-4 right-4 text-xs px-3 py-1 rounded-full"
                 style="background-color: #b9db32"
               >
-                {{ article.category }}
+                {{ article.name }}
               </span>
             </div>
             <div class="p-4">
@@ -51,50 +53,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+const { generateSlug } = useSlug();
+// Access the store
+const articleStore = useArticleStore();
 
-const articles = ref([
-  {
-    id: 1,
-    title: "US election results",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed",
-    image: "/latestnews/uselection.png",
-    category: "Politics",
-  },
-  {
-    id: 2,
-    title: "Terrorists killed in Kashmir",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed",
-    image: "/latestnews/kashmir.png",
-    category: "Defense",
-  },
-  {
-    id: 3,
-    title: "Singer Shardha Sinha died",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed",
-    image: "/latestnews/shradha.png",
-    category: "Entertainment",
-  },
-  {
-    id: 4,
-    title: "Virat Kohli’s birthday",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed",
-    image: "/latestnews/virat.png",
-    category: "Sports",
-  },
-  {
-    id: 5,
-    title: "Skoda Kylq launched",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed",
-    image: "/latestnews/scoda.png",
-    category: "Automobile",
-  },
-]);
+// Use `storeToRefs` to extract reactive properties
+const { latestArticles } = storeToRefs(articleStore);
+// Map state from the store
 </script>
 
 <style scoped>

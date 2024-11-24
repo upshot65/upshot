@@ -79,6 +79,7 @@
 <script setup>
 function handleSignIn() {
   // Add your login functionality here
+  console.log("done");
 }
 </script>
 

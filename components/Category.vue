@@ -6,7 +6,7 @@
       <section class="relative mb-8 rounded-lg overflow-hidden">
         <!-- Category Image -->
         <NuxtImg
-          :src="selectedCategory.image_url"
+          :src="selectedCategory?.image_url"
           alt="Category Image"
           class="w-full h-64 object-cover"
         />
@@ -17,17 +17,17 @@
         >
           <div class="flex gap-3 overflow-x-auto">
             <button
-              v-for="cat in interests"
-              :key="cat.id"
-              @click="selectCategory(cat)"
+              v-for="cat in categoriesWithLatest"
+              :key="cat.category.id"
+              @click="selectCategory(cat.category)"
               :class="[
                 'px-4 py-2 rounded-full text-sm font-medium',
-                selectedCategory?.id === cat.id
+                selectedCategory?.id === cat.category.id
                   ? 'bg-lime-500 text-white'
                   : 'bg-gray-200 text-gray-700',
               ]"
             >
-              {{ cat.name }}
+              {{ cat.category.name }}
             </button>
           </div>
           <div class="hidden sm:block">
@@ -47,7 +47,7 @@
       <!-- Articles List -->
       <section v-if="!isLoading" class="space-y-6">
         <ArticleCard
-          v-for="article in articles"
+          v-for="article in getArticlesByCategory(selectedCategory?.id)"
           :key="article.id"
           :image="article.header_image"
           :title="article.title"
@@ -61,7 +61,10 @@
       <div v-else class="text-center py-4">Loading...</div>
 
       <!-- Show More Button -->
-      <div v-if="hasMoreArticles" class="flex justify-center mt-8">
+      <div
+        v-if="hasMoreArticles(selectedCategory?.id)"
+        class="flex justify-center mt-8"
+      >
         <button
           @click="loadMoreArticles"
           class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
@@ -86,84 +89,77 @@
 </template>
 
 <script setup>
-// Get interests from the useState ("interests")
-const interests = useState("interests");
 const isLoading = ref(false); // Track loading state
+
+const articleStore = useArticleStore();
+const { categoriesWithLatest } = storeToRefs(articleStore);
+
+const categoryStore = useCategoryStore();
+
+const { getArticlesByCategory, hasMoreArticles } = storeToRefs(categoryStore);
+const currentPage = ref(1);
+// Fetch articles for the selected category
+
 // Default to "Technology" category or first available category
 const defaultCategory =
-  interests.value?.find((cat) => cat.name === "Technology") ||
-  (interests.value && interests.value[0]);
+  categoriesWithLatest.value?.find(
+    (cat) => cat?.category.name === "Technology"
+  ) ||
+  (categoriesWithLatest.value && categoriesWithLatest.value[0]?.category);
 
-const selectedCategory = ref(defaultCategory);
+const selectedCategory = useState(
+  `selectedCategory`,
+  () => defaultCategory?.category
+);
+
+selectedCategory.value = defaultCategory?.category;
+// const selectedCategory = ref(defaultCategory?.category);
 
 console.log("----selectedCategory---", selectedCategory.value);
 
-const articles = ref([]);
 const articlesPerPage = 10;
-const currentPage = ref(1);
-const hasMoreArticles = ref(true);
 
-// Fetch articles for the selected category
-const fetchArticles = async () => {
-  try {
-    isLoading.value = true;
-    console.log("---making api call again---", selectedCategory.value.id);
-    const data = await $fetch("/api/articles", {
-      params: {
-        categoryId: selectedCategory.value.id,
-        page: currentPage.value,
-        limit: articlesPerPage,
-      },
-    });
-
-    console.log("-----data----", data);
-
-    if (data.articles.length < articlesPerPage) {
-      hasMoreArticles.value = false;
-    }
-    articles.value.push(...data.articles);
-  } catch (error) {
-    console.error("Error fetching articles:", error);
-  } finally {
-    isLoading.value = false;
-  }
-};
-
-watchEffect(() => {
+// Fetch categories on mount
+onMounted(async () => {
   if (selectedCategory.value) {
-    fetchArticles();
+    await categoryStore.fetchArticles(
+      selectedCategory.value.id,
+      currentPage.value,
+      articlesPerPage
+    );
   }
 });
 
+// Watch for category selection
+watch(
+  selectedCategory,
+  async (newCategory) => {
+    if (!newCategory) return;
+    currentPage.value = 1;
+    isLoading.value = true;
+    await categoryStore.fetchArticles(newCategory.id, currentPage.value, 10);
+    isLoading.value = false;
+  },
+  { immediate: true }
+);
+
+// Load more articles
 const loadMoreArticles = async () => {
-  if (!hasMoreArticles.value) return;
+  if (
+    !selectedCategory.value ||
+    !hasMoreArticles.value(selectedCategory.value.id)
+  )
+    return;
 
-  try {
-    // isLoading.value = true;
-    currentPage.value += 1;
-
-    const response = await $fetch("/api/articles", {
-      params: {
-        categoryId: selectedCategory.value.id,
-        page: currentPage.value,
-        limit: articlesPerPage,
-      },
-    });
-
-    if (response.articles.length < articlesPerPage) {
-      hasMoreArticles.value = false;
-    }
-
-    articles.value.push(...response.articles);
-  } catch (error) {
-    console.error("Error loading more articles:", error);
-  } finally {
-    // isLoading.value = false;
-  }
+  currentPage.value += 1;
+  isLoading.value = true;
+  await store.fetchArticles(selectedCategory.value.id, currentPage.value, 10);
+  isLoading.value = false;
 };
 
 // Handle category selection
 const selectCategory = (category) => {
+  console.log("----selecting category---", category);
   if (selectedCategory.value.id !== category.id) {
     selectedCategory.value = category;
     currentPage.value = 1;
