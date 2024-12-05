@@ -35,7 +35,9 @@
                   {{ article.name }}
                 </span>
               </div>
-              <div class="p-4 absolute bottom-3 left-3">
+              <div
+                class="p-4 absolute bottom-3 left-3 latest-news-content-morphisam"
+              >
                 <h3 class="text-lg font-bold text-white mb-2">
                   {{ article.title }}
                 </h3>
@@ -187,5 +189,10 @@ const { latestArticles } = storeToRefs(articleStore);
   z-index: -1;
   width: 555px;
   object-fit: cover;
+}
+.latest-news-content-morphisam {
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
 }
 </style>
