@@ -35,13 +35,21 @@
                   {{ article.name }}
                 </span>
               </div>
+              <div class="p-4 absolute bottom-3 left-3">
+                <h3 class="text-lg font-bold text-white mb-2">
+                  {{ article.title }}
+                </h3>
+                <p class="text-white text-sm">
+                  {{ article.description }}
+                </p>
+              </div>
             </div>
           </NuxtLink>
         </div>
       </div>
       <div class="mobile-latest-news-section-cards">
         <div
-          v-for="(article, index) in articles"
+          v-for="(article, index) in latestArticles"
           :key="index"
           :class="{
             'mobile-latest-news-section-cards-firstCard': index === 0,
@@ -51,7 +59,7 @@
           <NuxtLink>
             <div>
               <NuxtImg
-                :src="article.image"
+                :src="article.header_image"
                 :alt="article.title"
                 sizes="100vw sm:50vw md:400px"
                 class="w-full h-full object-cover rounded-xl"
@@ -65,7 +73,7 @@
                   class="absolute top-10 right-10 text-xs px-3 py-1 rounded-full"
                   style="background-color: #b9db32"
                 >
-                  {{ article.category }}
+                  {{ article.name }}
                 </span>
                 <div class="text-black mt-5">
                   <h3 class="text-lg font-bold mb-2">
