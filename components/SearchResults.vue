@@ -119,6 +119,7 @@ const fetchArticles = useDebounceFn(async () => {
     totalArticles.value = total || 0;
   } catch (error) {
     console.error("Error fetching articles:", error);
+    console.log("ok");
   }
 }, 300); // Debounce time: 300ms
 
