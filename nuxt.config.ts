@@ -11,4 +11,5 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
   },
+  css: ["@fortawesome/fontawesome-free/css/all.min.css"],
 });
