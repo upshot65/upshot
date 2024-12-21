@@ -99,12 +99,20 @@
           </div>
           <ul v-show="isDesktop || isOpen.help" class="space-y-1 md:pl-0 pl-4">
             <li>
-              <a href="#" class="hover:text-blue-600">Customer Support</a>
+              <NuxtLink to="/customer-support" class="hover:text-blue-600">
+                Customer Support</NuxtLink
+              >
             </li>
             <li>
-              <a href="#" class="hover:text-blue-600">Terms & Conditions</a>
+              <NuxtLink to="/tc" class="hover:text-blue-600">
+                Terms & Conditions</NuxtLink
+              >
             </li>
-            <li><a href="#" class="hover:text-blue-600">Privacy Policy</a></li>
+            <li>
+              <NuxtLink to="/privacy-policy" class="hover:text-blue-600">
+                Privacy Policy</NuxtLink
+              >
+            </li>
           </ul>
         </div>
 
