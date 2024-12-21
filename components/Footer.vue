@@ -138,7 +138,9 @@
             <li>
               <a href="#" class="hover:text-blue-600">Previous newsletters</a>
             </li>
-            <li><a href="#" class="hover:text-blue-600">Top Articles</a></li>
+            <NuxtLink to="/top-articles" class="hover:text-blue-600">
+              Top Articles</NuxtLink
+            >
           </ul>
         </div>
       </div>
