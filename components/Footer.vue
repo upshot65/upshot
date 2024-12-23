@@ -11,8 +11,7 @@
         class="md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left space-y-4"
       >
         <p class="text-gray-600">
-          Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus
-          habitant sed.
+          Crafting Brands with Responsibility.
         </p>
 
         <!-- Social Icons (Positioned below the description on all devices) -->
