@@ -138,7 +138,7 @@
             class="space-y-1 md:pl-0 pl-4"
           >
             <li>
-              <a href="#" class="hover:text-blue-600">Previous newsletters</a>
+              <a href="#" class="hover:text-blue-600">Reading list</a>
             </li>
             <NuxtLink to="/top-articles" class="hover:text-blue-600">
               Top Articles</NuxtLink
