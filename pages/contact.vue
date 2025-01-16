@@ -21,7 +21,7 @@
           </div>
           <div class="flex items-center space-x-2">
             <i class="fas fa-map-marker-alt"></i>
-            <span>HQ: 12/4, Film Colony, regal Square, indore (M.P)</span>
+            <span>HQ: 12/4, Film Colony, Regal Square, Indore (M.P)</span>
           </div>
         </div>
         <div class="flex space-x-4 mt-4">
