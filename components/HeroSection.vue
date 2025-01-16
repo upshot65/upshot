@@ -19,6 +19,7 @@
 .hero-section {
   background-image: url("/hero/landing-hero-bg.png");
   background-size: cover;
+  background-size: 90%;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
