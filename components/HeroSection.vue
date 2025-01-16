@@ -3,7 +3,7 @@
     <div class="hero-content">
       <div class="hero-content-heading">
         <h1
-          class="text-2xl md:text-4xl lg:text-7xl font-bold text-gray-900 leading-tight"
+          class="text-2xl md:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight"
         >
           Your daily dose of <br class="hidden md:block" />
           insights, & stories
