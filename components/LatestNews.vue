@@ -1,7 +1,7 @@
 <template>
   <section class="latest-news-section">
     <div class="w-full max-w-7xl mx-auto px-4 py-8">
-      <h2 class="text-2xl font-bold text-blue-900 mb-6">Latest News</h2>
+      <h2 class="text-2xl font-bold text-blue-900 mb-6">Updates</h2>
 
       <!-- Articles Grid -->
       <div class="web-latest-news-section-cards">
