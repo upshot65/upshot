@@ -164,6 +164,36 @@
             </div>
           </div>
         </section>
+
+         <section>
+        <h2
+        class="text-2xl font-semibold text-gray-700 mb-1 border-b-2 border-blue-500 pb-2">
+        USER ACCOUNT AND USER OBLIGATIONS
+      </h2>
+        <p class="text-gray-600 leading-relaxed mb-1">
+         
+          <br />
+          The User may view and/or access the Services or the Platform by simply visiting the Platform and clicking on relevant pages that include articles, newsletters. Furthermore, to access certain other Services, the User must first create a User Account with the Platform by providing details, including Personal Data as may be required by the Company and provided for in the Privacy Policy.
+        </p>
+        
+        <p class="text-gray-600 leading-relaxed mb-4">
+          <strong>Confidentiality Obligation:</strong> User shall be responsible for maintaining the confidentiality of the credentials of User Account, and furthermore, Company shall process and maintain the confidentiality of the Personal Data (defined) in accordance with the Applicable Law and is dealt in detail in the Privacy Policy of Company.
+        </p>
+  
+        <p class="text-gray-600 leading-relaxed mb-4">
+          In consideration of Your use of the Platform, You agree: 
+          <ul class="list-disc list-inside">
+            <li>(a) that You are of legal age and have the capacity to agree to these Terms and furthermore, if You are a parent / legal guardian of a “minor” then in that event the compliance to the Applicable Law should be adhered to and Company reserves the legal rights to insert necessary protocols / check mechanism to enforce the foregoing including but not limited to the parental / legal guardian’s consent, if required under the Applicable Law and as detailed under the Privacy Policy;</li>
+            <li>(b) to provide complete, accurate, current, and required information about You as may be prompted at the time of registration on the Platform ("Personal Data");</li>
+            <li>(c) to maintain the security of Your password and identification;</li>
+            <li>(d) to maintain and promptly update the Personal Data and any information You provide to Company, to keep it accurate, current and complete for providing the Services.</li>
+          </ul>
+        </p>
+  
+        <p class="text-gray-600 leading-relaxed mb-4">
+          You are not permitted to use the Platform or submit Content to the Platform if You do not follow these Terms. If You provide any information that is untrue, inaccurate, unauthorized, not current, or incomplete (or becomes untrue, inaccurate, not current, or incomplete), or if the Company has reasonable grounds to suspect that such information is untrue, inaccurate, not current, or incomplete, the Company has the right to refuse any and all the Services.
+        </p>
+      </section>
       </div>
     </div>
   </div>
