@@ -27,7 +27,7 @@
                   <NuxtImg
                     :src="article.header_image"
                     :alt="article.title"
-                    class="w-full h-48 object-cover rounded-xl"
+                    class="w-full h-48 object-cover rounded-xl featured-image"
                   />
                   <div class="p-4">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">
@@ -219,5 +219,14 @@ const updateCurrentDot = (position) => {
   .featured-section-main-image {
     display: none !important;
   }
+}
+
+  .featured-image {
+  display: inline-block;
+  transition: transform 0.6s ease; /* Smooth transition for both hover in and out */
+}
+
+.featured-image:hover {
+  transform: scale(1.1); /* Shrink the image */
 }
 </style>
