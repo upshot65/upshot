@@ -13,15 +13,15 @@
         <div class="space-y-2">
           <div class="flex items-center space-x-2">
             <i class="fas fa-phone"></i>
-            <span>+1012 3456 789</span>
+            <span>+91 8962429492</span>
           </div>
           <div class="flex items-center space-x-2">
             <i class="fas fa-envelope"></i>
-            <span>demo@gmail.com</span>
+            <span>contact@upshotbrandmedia.com</span>
           </div>
           <div class="flex items-center space-x-2">
             <i class="fas fa-map-marker-alt"></i>
-            <span>132 Dartmouth Street Boston, MA 02156 USA</span>
+            <span>HQ: 12/4, Film Colony, regal Square, indore (M.P)</span>
           </div>
         </div>
         <div class="flex space-x-4 mt-4">
