@@ -20,7 +20,7 @@
             href="category"
             aria-label="Twitter"
             target="_blank"
-            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+           class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
           >
             <i class="fab fa-twitter text-gray-600"></i>
           </a>
@@ -28,7 +28,7 @@
             href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"
             aria-label="Facebook"
             target="_blank"
-            class="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition"
+           class="p-2 rounded-full bg-gray-300 text-white hover:bg-green-600 transition"
           >
             <i class="fab fa-facebook-f"></i>
           </a>
@@ -36,7 +36,7 @@
             href="https://www.instagram.com/upshotbrandmedia/profilecard/?igsh=MWE4ZnRpc2ZxemIxMg%3D%3D"
             aria-label="Instagram"
             target="_blank"
-            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+            class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
           >
             <i class="fab fa-instagram text-gray-600"></i>
           </a>
