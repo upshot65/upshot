@@ -81,37 +81,50 @@
       </div>
     </div>
 
-    <!-- Selected Category Article Preview -->
-    <div v-if="selectedArticle" class="relative mt-8">
-      <NuxtLink
-        :to="`/articles/${selectedArticle?.latest_article?.id}-${generateSlug(
-          selectedArticle?.latest_article?.title
-        )}`"
+    <!-- Articles List -->
+    <section v-if="!isLoading" class="space-y-6">
+      <ArticleCard
+        v-for="article in getArticlesByCategory(selectedCategory?.category.id)"
+        :key="article.id"
+        :image="article.header_image"
+        :title="article.title"
+        :description="article.description"
+        :datePosted="article.created_at"
+        :articleId="article.id"
+      />
+    </section>
+
+    <!-- Loading State -->
+    <div v-else class="text-center py-4">Loading...</div>
+
+    <!-- Show More Button -->
+    <div
+      v-if="hasMoreArticles(selectedCategory?.id)"
+      class="flex justify-center mt-8"
+    >
+      <button
+        @click="loadMoreArticles"
+        class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
+        style="background-color: #004aac"
       >
-        <NuxtImg
-          :src="selectedArticle?.latest_article?.header_image"
-          :alt="selectedArticle?.category?.image_url"
-          class="w-full rounded-lg object-cover"
-        />
-        <div
-          class="absolute bottom-4 left-4 text-white bg-black bg-opacity-60 p-2 rounded-lg"
-        >
-          <h3 class="text-lg font-semibold">
-            {{ selectedArticle?.latest_article?.title }}
-          </h3>
-        </div>
-      </NuxtLink>
+        Show More ^
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 const { generateSlug } = useSlug();
+const isLoading = ref(false); // Track loading state
 const articleStore = useArticleStore();
 const { categoriesWithLatest } = storeToRefs(articleStore);
 
 // Show a maximum of 5 categories in the first row
 const MAX_CATEGORIES_FIRST_ROW = 8;
+const currentPage = ref(1);
+const categoryStore = useCategoryStore();
+
+const { getArticlesByCategory, hasMoreArticles } = storeToRefs(categoryStore);
 
 const showAll = ref(false);
 const selectedCategory = useState("selectedCategory", () => null);
@@ -139,7 +152,26 @@ function selectCategory(category) {
     categoriesWithLatest.value.find(
       (article) => article?.category?.name === category?.category?.name
     ) || null;
+  console.log("selectedCategory", selectedCategory.value.category);
 }
+
+// Watch for category selection
+watch(
+  selectedCategory,
+  async (newCategory) => {
+    if (!newCategory) return;
+    console.log("newCategory", newCategory.category);
+    currentPage.value = 1;
+    isLoading.value = true;
+    await categoryStore.fetchArticles(
+      newCategory.category.id,
+      currentPage.value,
+      10
+    );
+    isLoading.value = false;
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>
