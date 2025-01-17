@@ -80,51 +80,15 @@
         </p>
       </div>
     </div>
-
-    <!-- Articles List -->
-    <section v-if="!isLoading" class="space-y-6">
-      <ArticleCard
-        v-for="article in getArticlesByCategory(selectedCategory?.category.id)"
-        :key="article.id"
-        :image="article.header_image"
-        :title="article.title"
-        :description="article.description"
-        :datePosted="article.created_at"
-        :articleId="article.id"
-      />
-    </section>
-
-    <!-- Loading State -->
-    <div v-else class="text-center py-4">Loading...</div>
-
-    <!-- Show More Button -->
-    <div
-      v-if="hasMoreArticles(selectedCategory?.id)"
-      class="flex justify-center mt-8"
-    >
-      <button
-        @click="loadMoreArticles"
-        class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
-        style="background-color: #004aac"
-      >
-        Show More ^
-      </button>
-    </div>
   </div>
 </template>
 
 <script setup>
-const { generateSlug } = useSlug();
-const isLoading = ref(false); // Track loading state
 const articleStore = useArticleStore();
 const { categoriesWithLatest } = storeToRefs(articleStore);
-
+const router = useRouter();
 // Show a maximum of 5 categories in the first row
 const MAX_CATEGORIES_FIRST_ROW = 8;
-const currentPage = ref(1);
-const categoryStore = useCategoryStore();
-
-const { getArticlesByCategory, hasMoreArticles } = storeToRefs(categoryStore);
 
 const showAll = ref(false);
 const selectedCategory = useState("selectedCategory", () => null);
@@ -152,26 +116,11 @@ function selectCategory(category) {
     categoriesWithLatest.value.find(
       (article) => article?.category?.name === category?.category?.name
     ) || null;
-  console.log("selectedCategory", selectedCategory.value.category);
+  router.push({
+    path: "/category",
+    query: { q: category?.category?.id },
+  });
 }
-
-// Watch for category selection
-watch(
-  selectedCategory,
-  async (newCategory) => {
-    if (!newCategory) return;
-    console.log("newCategory", newCategory.category);
-    currentPage.value = 1;
-    isLoading.value = true;
-    await categoryStore.fetchArticles(
-      newCategory.category.id,
-      currentPage.value,
-      10
-    );
-    isLoading.value = false;
-  },
-  { immediate: true }
-);
 </script>
 
 <style scoped>
