@@ -1,142 +1,134 @@
 <template>
-  <div class="privacy-policy-page py-10 px-6 md:px-16 lg:px-32">
-    <!-- Hero Section -->
-    <section class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-800 mb-4">Privacy Policy</h1>
-      <p class="text-lg text-gray-600 leading-relaxed">
-        Your privacy is important to us. This Privacy Policy outlines how we
-        collect, use, and protect your information when you use our website.
+  <div class="px-6">
+    <div class="max-w-4xl mx-auto p-8 rounded-lg">
+      <h1 class="text-3xl font-bold text-center mb-8">Privacy Policy</h1>
+      <p class="text-gray-600 text-sm text-center mb-4">
+        As updated on 14th December 2024
       </p>
-    </section>
 
-    <!-- Information We Collect -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        Information We Collect
-      </h2>
-      <ul class="list-disc pl-6 text-gray-700 space-y-3">
-        <li>
-          <strong>Personal Information:</strong> We may collect your name, email
-          address, or contact details when you sign up or contact us.
-        </li>
-        <li>
-          <strong>Usage Data:</strong> Information about how you use our
-          website, including pages visited, time spent, and interactions, may be
-          collected automatically.
-        </li>
-        <li>
-          <strong>Cookies:</strong> We use cookies to enhance your browsing
-          experience and understand user preferences.
-        </li>
-      </ul>
-    </section>
+      <section class="space-y-6">
+        <p class="text-gray-700 leading-relaxed">
+          This privacy policy (“Policy”) explains how Company (as defined below)
+          collects, processes, stores, and/or shares any Personal Data (as
+          defined below) and/or other information from or about the users (“You”
+          or “Your” or “User” or “Users”) via your access and registration on
+          the web-based platform www.UpshotBrandMedia.com and mobile application
+          ‘Upshot Brand Media’ (collectively, the “Platform”), operated and
+          managed by Upshot Brand Media LLP, a company having its registered
+          office at 12/4, Film Colony, Film Colony Area, Indore, Madhya Pradesh,
+          India - 452001 and its subsidiaries under the registered trademark
+          ‘Upshot Brand Media’.
+        </p>
 
-    <!-- How We Use Your Information -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        How We Use Your Information
-      </h2>
-      <p class="text-gray-700 leading-relaxed">
-        The information we collect is used to:
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-3">
-        <li>Provide, maintain, and improve our website and services.</li>
-        <li>
-          Send updates, newsletters, or promotional content (only if you
-          subscribe).
-        </li>
-        <li>Analyze user behavior to improve content and features.</li>
-        <li>
-          Ensure the security of our website and protect against unauthorized
-          access.
-        </li>
-      </ul>
-    </section>
+        <p class="text-gray-700 leading-relaxed">
+          That the Company has granted a worldwide, non-exclusive,
+          non-sublicensable, non-transferable, and non-assignable license to the
+          subsidiary to access, use, manage and operate the Platform and use the
+          Company’s intellectual property in relation to its use on the
+          Platform.
+        </p>
 
-    <!-- Sharing of Information -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        Sharing of Information
-      </h2>
-      <p class="text-gray-700 leading-relaxed">
-        We do not sell or share your personal information with third parties,
-        except as required by law or for the following purposes:
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-3">
-        <li>
-          To trusted service providers who assist us in operating the website.
-        </li>
-        <li>To comply with legal obligations or protect our legal rights.</li>
-      </ul>
-    </section>
+        <p class="text-gray-700 leading-relaxed font-semibold">
+          WE VALUE OUR USERS’ PRIVACY AND SO WE HAVE PREPARED THIS POLICY TO
+          DEMONSTRATE OUR PROCEDURES IN RELATION TO PERSONAL DATA.
+        </p>
 
-    <!-- Your Privacy Rights -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        Your Privacy Rights
-      </h2>
-      <p class="text-gray-700 leading-relaxed">You have the right to:</p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-3">
-        <li>Access, update, or delete your personal information.</li>
-        <li>Opt out of receiving promotional communications.</li>
-        <li>Request details about the data we collect and how we use it.</li>
-      </ul>
-    </section>
+        <p class="text-gray-700 leading-relaxed">
+          By accessing and/or using the Platform, You consent to the collection,
+          storage, disclosure, and other uses of Your information per this
+          Policy. As mentioned in the general terms set out hereinbelow, You
+          must be at least of legal age to access the Platform and/or use the
+          Services.
+        </p>
 
-    <!-- Security Measures -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        Security Measures
-      </h2>
-      <p class="text-gray-700 leading-relaxed">
-        We implement industry-standard security measures to protect your
-        information from unauthorized access, loss, or misuse. However, no
-        method of transmission over the internet is entirely secure, and we
-        cannot guarantee absolute security.
-      </p>
-    </section>
+        <p class="text-gray-700 leading-relaxed">
+          By clicking on the “I accept” button provided in the Platform, You
+          expressly accept this Policy and agree to be legally bound by them.
+          Further, by furnishing Your Personal Data to the Company or giving
+          Your consent to the Company to access Your Personal Data for the
+          Purpose of rendering the Services (as defined below), You also agree
+          that You are interested in accessing the Platform and/or availing of
+          the Services through the Platform in accordance with the Terms of Use
+          of the Company.
+        </p>
 
-    <!-- Updates to This Policy -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-        Updates to This Policy
-      </h2>
-      <p class="text-gray-700 leading-relaxed">
-        We may update this Privacy Policy from time to time. Any changes will be
-        posted on this page, and the "Last Updated" date will be revised
-        accordingly.
-      </p>
-    </section>
+        <p class="text-gray-700 leading-relaxed">
+          This Terms is an electronic record in terms of the Information
+          Technology Act, 2000 and rules made thereunder as applicable. The
+          Terms is (i) published in accordance with the provisions of Rule
+          3(1)(a) of the Information Technology (Intermediary Guidelines and
+          Digital Media Ethics Code) Rules, 2021 and (ii) generated by a
+          computer system and does not require any physical, electronic, or
+          digital signatures by the Company.
+        </p>
+      </section>
 
-    <!-- Contact Us -->
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Contact Us</h2>
-      <p class="text-gray-700 leading-relaxed">
-        If you have any questions or concerns about this Privacy Policy or our
-        practices, please contact us:
-      </p>
-      <ul class="list-disc pl-6 text-gray-700 space-y-3">
-        <li>
-          <strong>Email:</strong>
-          <a
-            href="mailto:ubm@upshotbrandmedia"
-            class="text-blue-500 hover:underline"
-            >ubm@upshotbrandmedia</a
-          >
-        </li>
-        <li>
-          <strong>Phone:</strong>
-          <a href="tel:+918962429492" class="text-blue-500 hover:underline"
-            >+91-8962429492</a
-          >
-        </li>
-      </ul>
-    </section>
+      <div class="bg-gray-50 p-4 rounded-md shadow-md">
+        <h2 class="text-lg font-bold">Defined Terms</h2>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>
+            <strong>“Applicable Law”:</strong> Includes all laws, ordinances,
+            statutes, rules, orders, decrees, etc., applicable in India,
+            including but not limited to the Information Technology Act, 2000
+            and the Digital Personal Data Protection Act, 2023.
+          </li>
+          <li>
+            <strong>“Content”:</strong> Refers to any content, including but not
+            limited to pictures, messages, and videos, that may be shared,
+            uploaded, and posted on the Platform by the User.
+          </li>
+          <li>
+            <strong>“Event”:</strong> shall have the meaning as ascribed to
+            under Clause 4.2.3;
+          </li>
+          <li>
+            <strong>“Materials”:</strong> includes (i) the text, software,
+            scripts, graphics, photos, sounds, music, videos, audio-visual
+            combinations, interactive features and other materials and (ii)
+            comments and Content that You may contribute in any manner on a
+            particular section of Platform via features or functionalities to
+            the Platform.
+          </li>
+          <li>
+            <strong>“Personal Data”:</strong> As defined under Clause 2.1 of the
+            Policy.
+          </li>
+
+          <li>
+            <strong>“Purpose”:</strong> shall have the meaning as ascribed to
+            under Clause 2.2;
+          </li>
+          <li>
+            <strong>“Services”:</strong> The Platform provides easily accessible
+            content, connections and communications that powers brand and
+            business objectives generated, developed or produced by the Company
+            or aggregated, obtained and/or licensed through third party sources.
+            Furthermore, promptly and efficiently responding to Your queries or
+            issues relating to Your User Account and the services availed
+            through the Platform. The Company may, at its discretion, add,
+            modify, or remove any of the Services listed from time to time
+            without special notice.;
+          </li>
+          <li>
+            <strong>“Terms of Use”:</strong> shall mean the terms of use
+            available on the Platform;
+          </li>
+          <li>
+            <strong>“User Account”:</strong> means the personal online account
+            created by the User to gain access and use the Platform.
+          </li>
+          <li>
+            Any capitalized terms in this Policy not defined hereinunder shall
+            have the meaning assigned under the Terms of Use of the Company.
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup></script>
 
-<style scoped>
-/* Add any custom styles if needed */
+<style>
+/* Optional additional custom styling if needed */
 </style>
