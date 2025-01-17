@@ -90,10 +90,10 @@
 
 <script setup>
 const isLoading = ref(false); // Track loading state
-
+const route = useRoute();
 const articleStore = useArticleStore();
 const { categoriesWithLatest } = storeToRefs(articleStore);
-
+const query = computed(() => route.query.q || "");
 const categoryStore = useCategoryStore();
 
 const { getArticlesByCategory, hasMoreArticles } = storeToRefs(categoryStore);
@@ -113,6 +113,12 @@ const selectedCategory = useState(
 );
 
 selectedCategory.value = defaultCategory?.category;
+
+  if (query.value) {
+  selectedCategory.value = categoriesWithLatest.value?.find((cat) => {
+    return cat?.category.id == query.value;
+  })?.category;
+}
 // const selectedCategory = ref(defaultCategory?.category);
 
 console.log("----selectedCategory---", selectedCategory.value);
