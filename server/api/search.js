@@ -1,5 +1,5 @@
 // server/api/search.js
-
+import { serverSupabaseClient } from "#supabase/server";
 export default defineEventHandler(async (event) => {
   const { query, categoryId, page = 1, limit = 10 } = getQuery(event);
 
@@ -13,8 +13,8 @@ export default defineEventHandler(async (event) => {
 
   // Build the search query with full-text search
   let searchQuery = supabase
-    .from("articles")
-    .select("id, title, header, content, category_id", { count: "exact" });
+    .from("article")
+    .select("id, title, header_image, content, category_id", { count: "exact" });
 
   // Full-text search on search_vector using query string
   if (query) {

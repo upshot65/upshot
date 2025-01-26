@@ -1,5 +1,8 @@
 <template>
-  <footer class="text-gray-700 py-10 px-6" style="background-color: #f1eded">
+  <footer
+    class="text-gray-700 py-10 px-6 mt-20 footer-section"
+    style="background-color: #f1eded"
+  >
     <div
       class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between space-y-10 md:space-y-0"
     >
@@ -8,8 +11,7 @@
         class="md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left space-y-4"
       >
         <p class="text-gray-600">
-          Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus
-          habitant sed.
+          Crafting Brands with Responsibility.
         </p>
 
         <!-- Social Icons (Positioned below the description on all devices) -->
@@ -17,21 +19,24 @@
           <a
             href="category"
             aria-label="Twitter"
-            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+            target="_blank"
+           class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
           >
             <i class="fab fa-twitter text-gray-600"></i>
           </a>
           <a
-            href="#"
+            href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"
             aria-label="Facebook"
-            class="p-2 rounded-full bg-green-500 text-white hover:bg-green-600 transition"
+            target="_blank"
+           class="p-2 rounded-full bg-gray-300 text-white hover:bg-green-600 transition"
           >
             <i class="fab fa-facebook-f"></i>
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/upshotbrandmedia/profilecard/?igsh=MWE4ZnRpc2ZxemIxMg%3D%3D"
             aria-label="Instagram"
-            class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+            target="_blank"
+            class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
           >
             <i class="fab fa-instagram text-gray-600"></i>
           </a>
@@ -96,12 +101,20 @@
           </div>
           <ul v-show="isDesktop || isOpen.help" class="space-y-1 md:pl-0 pl-4">
             <li>
-              <a href="#" class="hover:text-blue-600">Customer Support</a>
+              <NuxtLink to="/customer-support" class="hover:text-blue-600">
+                Customer Support</NuxtLink
+              >
             </li>
             <li>
-              <a href="#" class="hover:text-blue-600">Terms & Conditions</a>
+              <NuxtLink to="/tc" class="hover:text-blue-600">
+                Terms & Conditions</NuxtLink
+              >
             </li>
-            <li><a href="#" class="hover:text-blue-600">Privacy Policy</a></li>
+            <li>
+              <NuxtLink to="/privacy-policy" class="hover:text-blue-600">
+                Privacy Policy</NuxtLink
+              >
+            </li>
           </ul>
         </div>
 
@@ -125,9 +138,11 @@
             class="space-y-1 md:pl-0 pl-4"
           >
             <li>
-              <a href="#" class="hover:text-blue-600">Previous newsletters</a>
+              <a href="#" class="hover:text-blue-600">Reading list</a>
             </li>
-            <li><a href="#" class="hover:text-blue-600">Top Articles</a></li>
+            <NuxtLink to="/top-articles" class="hover:text-blue-600">
+              Top Articles</NuxtLink
+            >
           </ul>
         </div>
       </div>
@@ -139,6 +154,11 @@
     >
       © Copyright 2024, All Rights Reserved
     </div>
+    <NuxtImg
+      src="/images/blue-footer-start.png"
+      alt="Hero Background"
+      class="footer-section-image"
+    />
   </footer>
 </template>
 
@@ -174,5 +194,23 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Additional styling if needed */
+.footer-section {
+  position: relative;
+  padding-top: 130px;
+  /* margin: 30px 0; */
+}
+.footer-section-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-section-image {
+    width: 150px;
+  }
+}
 </style>

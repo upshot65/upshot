@@ -3,46 +3,6 @@
     <div class="max-w-7xl mx-auto p-6">
       <!-- Category Header with Image and Category List -->
       <!-- Category Header with Image and Category List Overlayed -->
-      <section class="relative mb-8 rounded-lg overflow-hidden">
-        <!-- Category Image -->
-        <NuxtImg
-          :src="selectedCategory?.image_url"
-          alt="Category Image"
-          class="w-full h-64 object-cover"
-        />
-
-        <!-- Category List Overlay -->
-        <div
-          class="absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/40 to-transparent p-4"
-        >
-          <div class="flex gap-3 overflow-x-auto">
-            <button
-              v-for="cat in categoriesWithLatest"
-              :key="cat?.category.id"
-              @click="selectCategory(cat?.category)"
-              :class="[
-                'px-4 py-2 rounded-full text-sm font-medium',
-                selectedCategory?.id === cat.category.id
-                  ? 'bg-lime-500 text-white'
-                  : 'bg-gray-200 text-gray-700',
-              ]"
-            >
-              {{ cat.category.name }}
-            </button>
-          </div>
-          <div class="hidden sm:block">
-            <div
-              class="w-10 h-10 rounded-full bg-lime-500 flex justify-center ml-3 cursor-pointer"
-            >
-              <NuxtImg
-                src="/images/category-menu-arrow.svg"
-                alt="Hero Background"
-                class="w-2"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       <!-- Articles List -->
       <section v-if="!isLoading" class="space-y-6">
@@ -90,10 +50,10 @@
 
 <script setup>
 const isLoading = ref(false); // Track loading state
-const route = useRoute();
+
 const articleStore = useArticleStore();
 const { categoriesWithLatest } = storeToRefs(articleStore);
-const query = computed(() => route.query.q || "");
+
 const categoryStore = useCategoryStore();
 
 const { getArticlesByCategory, hasMoreArticles } = storeToRefs(categoryStore);
@@ -113,12 +73,6 @@ const selectedCategory = useState(
 );
 
 selectedCategory.value = defaultCategory?.category;
-
-  if (query.value) {
-  selectedCategory.value = categoriesWithLatest.value?.find((cat) => {
-    return cat?.category.id == query.value;
-  })?.category;
-}
 // const selectedCategory = ref(defaultCategory?.category);
 
 console.log("----selectedCategory---", selectedCategory.value);
