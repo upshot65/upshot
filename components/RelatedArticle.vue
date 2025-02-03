@@ -1,32 +1,32 @@
 <template>
-  <section class="related-articles max-w-6xl mx-auto px-4 py-8">
+  <section class="related-articles max-w-6xl mx-auto pb-8">
     <div class="relative">
       <!-- Slider Container -->
       <div class="overflow-hidden">
         <div
-          class="flex transition-transform duration-500 ease-in-out"
+          class="flex transition-transform justify-between duration-500 ease-in-out"
           :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
         >
           <!-- Slide Group -->
           <div
             v-for="(article, index) in articles"
             :key="index"
-            class="flex-shrink-0 px-2 h-[500px]"
+            class="flex-shrink-0 px-2 "
             :style="{ flex: `0 0 ${100 / itemsPerSlide}%` }"
           >
-            <div class="bg-white rounded-lg shadow-md overflow-hidden h-full">
+            <div class="bg-white rounded-lg overflow-hidden h-full">
               <NuxtImg
                 :src="article?.header_image"
                 :alt="article?.title"
-                class="w-full h-64 object-cover"
+                class="w-full h-40 mb-3 object-cover"
               />
-              <div class="p-6">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+              <div class="">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">
                   {{ article?.title }}
                 </h3>
-                <p class="text-gray-600 text-base leading-relaxed mb-4">
+                <!-- <p class="text-gray-600 text-base leading-relaxed mb-4">
                   {{ article?.description }}
-                </p>
+                </p> -->
               </div>
             </div>
           </div>

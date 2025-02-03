@@ -12,9 +12,9 @@
     />
 
     <!-- Article Author, Date, and Stats -->
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center  border-b justify-between mb-8">
       <!-- Author Info -->
-      <div class="flex items-center">
+      <div class="flex items-center ">
         <NuxtImg
           :src="article.authorImage"
           alt="Author Image"
@@ -22,92 +22,64 @@
         />
         <div>
           <p class="text-gray-800">{{ article.author }}</p>
-          <p class="text-gray-500">{{ formatDate(article.created_at) }}</p>
+          <p class="text-gray-500 text-sm">{{ formatDate(article.created_at) }}</p>
         </div>
       </div>
 
-      <!-- Article Stats -->
+
+    </div>
+
+<div class="flex items-center  border-b justify-between pb-5 mb-8">
+          <!-- Article Stats -->
       <div class="flex items-center gap-6">
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-1 cursor-pointer">
           <span class="text-gray-700 font-medium">{{ article.likes }}</span>
-          <svg
-            class="w-5 h-5 text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 9l-2-2m0 0L10 7m4-2a2 2 0 112.828 2.828L12 12m0 0L7.172 7.172a4 4 0 015.656-5.656M4 16v-2a4 4 0 014-4h7.58a2 2 0 001.637-.986l.137-.34a3 3 0 015.159 2.472v2M8 19l2-2m0 0l2 2m-2-2V13"
-            />
-          </svg>
+          <img src="/images/hands-clapping.png" alt=""/>
         </div>
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-1 cursor-pointer">
           <span class="text-gray-700 font-medium">{{ article.comments }}</span>
-          <svg
-            class="w-5 h-5 text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 10h10M3 6h6m7 10h1a2 2 0 002-2v-5a2 2 0 00-2-2h-4a2 2 0 00-2 2v1a2 2 0 002 2h3a2 2 0 012 2v1a2 2 0 01-2 2h-3m0 0H7"
-            />
-          </svg>
+          <img src="/images/comment.png" alt=""/>
         </div>
         <button
           @click="saveArticle"
           class="text-gray-700 hover:text-blue-600 font-medium"
         >
-          Save
+          <img src="/images/save.png" alt=""/>
         </button>
       </div>
-    </div>
-
     <!-- Social Media Sharing -->
-    <div class="flex items-center gap-4 mb-8">
+    <div class="flex items-center gap-4">
       <span class="text-gray-700 font-medium">Share:</span>
       <a
-        :href="`https://twitter.com/share?url=${articleUrl}&text=${article.title}`"
+        :href="`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`"
         target="_blank"
         class="text-gray-500 hover:text-blue-500"
       >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M22.46 6.03c-.77.35-1.6.59-2.47.7a4.3 4.3 0 001.88-2.37 8.57 8.57 0 01-2.72 1.04 4.28 4.28 0 00-7.29 3.9 12.14 12.14 0 01-8.81-4.47 4.27 4.27 0 001.33 5.7 4.27 4.27 0 01-1.94-.54v.05a4.28 4.28 0 003.43 4.2 4.28 4.28 0 01-1.94.07 4.29 4.29 0 004 2.97 8.61 8.61 0 01-5.3 1.83c-.34 0-.68-.02-1.02-.06A12.17 12.17 0 006.5 19.36 12.14 12.14 0 0018.55 7.3c0-.18-.01-.35-.02-.53a8.67 8.67 0 002.13-2.2"
-          />
-        </svg>
+        <img src="/images/linkedin.png" alt=""/>
       </a>
       <a
         :href="`https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`"
         target="_blank"
         class="text-gray-500 hover:text-blue-600"
       >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M22 12.07c0-5.48-4.53-9.93-10-9.93S2 6.59 2 12.07c0 4.88 3.5 8.93 8 9.72v-6.9h-2.4v-2.82H10v-1.98c0-2.36 1.42-3.66 3.58-3.66 1 0 2.04.18 2.04.18v2.24H14.6c-1.28 0-1.68.8-1.68 1.63v1.59h2.8l-.45 2.82H13v6.9c4.5-.79 8-4.84 8-9.72"
-          />
-        </svg>
+        <img src="/images/instagram.png" alt=""/>
       </a>
       <a
         :href="`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`"
         target="_blank"
         class="text-gray-500 hover:text-blue-700"
       >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M19 3A2 2 0 0021 5v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14M8.33 17v-5.67H5.67V17h2.66m0-8H5.67v2.67h2.66V9m5 5.67v-1.34c0-.74.45-1.34 1.13-1.34s1.13.6 1.13 1.34v1.34h2.67v-5.67h-2.66v.78A2.33 2.33 0 0012.5 10c-1.3 0-2.33 1.2-2.33 2.67V17h2.66z"
-          />
-        </svg>
+        <img src="/images/twitter.png" alt=""/>
+      </a>
+      <a
+        :href="`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`"
+        target="_blank"
+        class="text-gray-500 hover:text-blue-700"
+      >
+        <img src="/images/medium.png" alt=""/>
       </a>
     </div>
+  </div>
 
     <!-- Article Content -->
     <div class="text-gray-700 leading-relaxed" v-html="article.content"></div>
@@ -115,7 +87,7 @@
     <!-- Article Tags -->
     <div class="mt-6">
       <h3 class="text-xl font-semibold">Tags:</h3>
-      <div class="flex gap-2 mt-2">
+      <div class="flex gap-4 mt-2">
         <span
           v-for="tag in article.tags"
           :key="tag"
@@ -125,6 +97,24 @@
         </span>
       </div>
     </div>
+
+              <!-- Article Stats -->
+              <div class="flex items-center gap-6 py-4">
+        <div class="flex items-center gap-1 cursor-pointer">
+          <span class="text-gray-700 font-medium">{{ article.likes }}</span>
+          <img src="/images/hands-clapping.png" alt=""/>
+        </div>
+        <div class="flex items-center gap-1 cursor-pointer">
+          <span class="text-gray-700 font-medium">{{ article.comments }}</span>
+          <img src="/images/comment.png" alt=""/>
+        </div>
+        <button
+          @click="saveArticle"
+          class="text-gray-700 hover:text-blue-600 font-medium"
+        >
+          <img src="/images/save.png" alt=""/>
+        </button>
+      </div>
 
     <!-- Related Posts Section -->
     <div class="mt-8">

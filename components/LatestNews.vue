@@ -20,7 +20,6 @@
               <NuxtImg
                 :src="article.header_image"
                 :alt="article.title"
-                sizes="100vw sm:50vw md:400px"
                 class="w-full h-full object-cover rounded-xl"
                 densities="x1 x2"
                 quality="100"
@@ -35,16 +34,16 @@
                   {{ article.name }}
                 </span>
               </div>
-              <div
-                class="p-4 absolute bottom-3 left-3 latest-news-content-morphisam"
-              >
-                <h3 class="text-lg font-bold text-white mb-2">
-                  {{ article.title }}
-                </h3>
-                <p class="text-white text-sm">
-                  {{ article.description }}
-                </p>
-              </div>
+            </div>
+            <div
+              class="p-4 absolute bottom-3 left-3 latest-news-content-morphisam"
+            >
+              <h3 class="text-lg font-bold text-white mb-2">
+                {{ article.title }}
+              </h3>
+              <p class="text-white text-sm">
+                {{ article.description }}
+              </p>
             </div>
           </NuxtLink>
         </div>
@@ -70,21 +69,21 @@
               />
 
               <!-- Category Badge -->
-              <div>
-                <span
-                  class="absolute top-10 right-10 text-xs px-3 py-1 rounded-full"
-                  style="background-color: #b9db32"
-                >
-                  {{ article.name }}
-                </span>
-                <div class="text-black mt-5">
-                  <h3 class="text-lg font-bold mb-2">
-                    {{ article.title }}
-                  </h3>
-                  <p class="text-sm">
-                    {{ article.description }}
-                  </p>
-                </div>
+              <span
+              class="absolute top-10 right-10 text-xs px-3 py-1 rounded-full"
+              style="background-color: #b9db32"
+              >
+              {{ article.name }}
+              </span>
+            </div>
+            <div>
+              <div class="text-black mt-5">
+                <h3 class="text-lg font-bold mb-2">
+                  {{ article.title }}
+                </h3>
+                <p class="text-sm">
+                  {{ article.description }}
+                </p>
               </div>
             </div>
           </NuxtLink>
@@ -133,7 +132,7 @@ const { latestArticles } = storeToRefs(articleStore);
 .web-latest-news-section-cards-card-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transform: scale(1.1);
   transition: transform 0.5s ease-in-out;
 }
@@ -149,14 +148,7 @@ const { latestArticles } = storeToRefs(articleStore);
   transform: scale(1);
 }
 .web-latest-news-section-cards-card-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  opacity: 0;
+  color: #000;
   transition: opacity 0.3s ease-in-out;
 }
 

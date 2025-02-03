@@ -2,14 +2,14 @@
   <section class="category-section">
     <div class="max-w-7xl mx-auto p-6">
       <!-- Search Results Heading -->
-      <h2 class="text-2xl font-bold mb-4">Search Results: '{{ query }}'</h2>
-
+      <h2 class="text-2xl mb-8 font-medium mb-4"><span class="text-xl font-medium">Search Results:</span> '{{ query }}'</h2>
+      <h2 class="text-xl font-medium mb-4">Suggestions</h2>
       <!-- Suggestions Tags -->
       <div class="flex flex-wrap gap-2 mb-6">
         <span
           v-for="(suggestion, index) in suggestions"
           :key="index"
-          class="px-3 py-1 bg-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-300"
+          class="px-9 bg-[#B9DB32] text-black py-3 rounded-full text-sm cursor-pointer hover:bg-[#B9DB32]"
           @click="setQuery(suggestion)"
         >
           {{ suggestion }}

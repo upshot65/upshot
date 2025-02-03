@@ -1,41 +1,60 @@
 <!-- components/Header.vue -->
 <template>
-  <header class="px-4 py-3 shadow-md" style="background-color: #f1eded">
+  <header class="shadow-md z-10" style="background-color: #f1eded">
     <nav class="container mx-auto flex items-center justify-between relative">
-      <!-- Logo -->
-      <div class="flex items-center">
-        <NuxtLink to="/" class="text-xl font-bold">
-          <NuxtImg src="/logo.png" width="100" />
-        </NuxtLink>
-      </div>
+      <div class="flex justify-between items-center w-full">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <NuxtLink to="/" class="text-xl font-bold">
+        <NuxtImg src="/logo.png" class="w-[169px]" alt="Logo" />
+      </NuxtLink>
+    </div>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-6">
-        <NuxtLink to="/" class="hover:text-gray-600 transition-colors"
-          >Home</NuxtLink
-        >
-        <NuxtLink to="/category" class="hover:text-gray-600 transition-colors"
-          >Categories</NuxtLink
-        >
-        <NuxtLink to="/about" class="hover:text-gray-600 transition-colors"
-          >About Us</NuxtLink
-        >
-        <NuxtLink to="/contact" class="hover:text-gray-600 transition-colors"
-          >Contact</NuxtLink
-        >
-      </div>
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex relative left-[45px] items-center space-x-6">
+      <NuxtLink
+        to="/"
+        class="nav-link"
+        :class="{ 'active': $route.path === '/' }"
+      >Home</NuxtLink>
 
+      <NuxtLink
+        to="/category"
+        class="nav-link"
+        :class="{ 'active': $route.path === '/category' }"
+      >Categories</NuxtLink>
+
+      <NuxtLink
+        to="/about"
+        class="nav-link"
+        :class="{ 'active': $route.path === '/about' }"
+      >About Us</NuxtLink>
+
+      <NuxtLink
+        to="/contact"
+        class="nav-link"
+        :class="{ 'active': $route.path === '/contact' }"
+      >Contact</NuxtLink>
+
+      <NuxtLink
+        to="/portfolio"
+        class="nav-link text-blue-600 font-semibold"
+        :class="{ 'active': $route.path === '/portfolio' }"
+      >Portfolio</NuxtLink>
+    </div>
+  </div>
+    <div class="flex justify-end items-center w-full">
       <!-- Search Bar - Visible on all screen sizes -->
-      <div class="flex flex-1 justify-end items-center max-w-xs mx-4">
+      <div class="flex flex-1 w-full justify-end items-center max-w-sm mx-4">
         <div class="relative w-full">
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search Topics..."
-            class="w-full pl-8 pr-4 py-1 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-300"
+            class="w-[356px] pl-12 pr-4 py-3 rounded-full border border-[#D7D7D7] focus:outline-none bg-transparent placeholder:!text-[#49454F]"
           />
           <svg
-            class="w-4 h-4 absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500"
+            class="w-4 h-4 absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-500"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -57,22 +76,10 @@
           class="p-2 rounded-full hover:bg-gray-200 transition-colors flex items-center"
         >
           <div
-            class="w-8 h-8 rounded-full flex items-center justify-center"
+            class="w-14 h-14 rounded-full flex items-center justify-center"
             style="background-color: #004aac"
           >
-            <svg
-              class="w-7 h-7 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
+            <img src="../public/images/profile.png" alt="" style="max-width: 16px;"/>
           </div>
         </button>
 
@@ -192,7 +199,7 @@
           </div>
         </div>
       </div>
-
+    </div>
       <!-- Mobile Menu Button -->
       <button
         class="md:hidden p-2 rounded-lg hover:bg-gray-200 transition-colors ml-2"
@@ -312,3 +319,21 @@ watch(
   }
 );
 </script>
+<style scoped>
+.nav-link {
+  @apply text-gray-700 font-medium transition-all duration-300 hover:text-[#006CE7];
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 50%;
+  height: 3px;
+  background-color: #2c5eff; /* Blue underline */
+  transition: width 0.3s ease-in-out;
+}
+</style>

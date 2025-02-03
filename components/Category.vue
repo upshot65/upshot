@@ -4,48 +4,48 @@
       <!-- Category Header with Image and Category List -->
       <!-- Category Header with Image and Category List Overlayed -->
       <section class="relative mb-8 rounded-lg overflow-hidden">
-        <!-- Category Image -->
-        <NuxtImg
-          :src="selectedCategory?.image_url"
-          alt="Category Image"
-          class="w-full h-64 object-cover"
-        />
+  <!-- Category Image -->
+  <NuxtImg
+    :src="selectedCategory?.image_url"
+    alt="Category Image"
+    class="w-full h-[500px] object-cover"  
+  />
 
-        <!-- Category List Overlay -->
-        <div
-          class="absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/40 to-transparent p-4"
-        >
-          <div class="flex gap-3 overflow-x-auto">
-            <button
-              v-for="cat in categoriesWithLatest"
-              :key="cat?.category.id"
-              @click="selectCategory(cat?.category)"
-              :class="[
-                'px-4 py-2 rounded-full text-sm font-medium',
-                selectedCategory?.id === cat.category.id
-                  ? 'bg-lime-500 text-white'
-                  : 'bg-gray-200 text-gray-700',
-              ]"
-            >
-              {{ cat.category.name }}
-            </button>
-          </div>
-          <div class="hidden sm:block">
-            <div
-              class="w-10 h-10 rounded-full bg-lime-500 flex justify-center ml-3 cursor-pointer"
-            >
-              <NuxtImg
-                src="/images/category-menu-arrow.svg"
-                alt="Hero Background"
-                class="w-2"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- Category List Overlay -->
+  <div
+    class="absolute pb-8 inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/60 to-transparent p-4"
+  >
+    <div
+      class="flex gap-5 overflow-x-auto whitespace-nowrap scrollbar-hide"
+      ref="categoryScroll"
+    >
+      <button
+        v-for="cat in categoriesWithLatest"
+        :key="cat?.category.id"
+        @click="selectCategory(cat?.category)"
+        :class="[
+          'px-9 bg-[#B9DB32] text-black py-3 rounded-full text-sm font-medium',
+          selectedCategory?.id === cat.category.id
+            ? ''
+            : '',
+        ]"
+      >
+        {{ cat.category.name }}
+      </button>
+    </div>
+
+    <!-- Arrow Button -->
+    <div class="ml-3 flex items-center">
+      <button class="w-8 h-8 flex justify-center items-center bg-[#B9DB32] rounded-full">
+        <NuxtImg src="/images/category-menu-arrow.svg" alt="Next" class="w-2" />
+      </button>
+    </div>
+  </div>
+</section>
+
 
       <!-- Articles List -->
-      <section v-if="!isLoading" class="space-y-6">
+      <section v-if="!isLoading" class="space-y-6 mt-16">
         <ArticleCard
           v-for="article in getArticlesByCategory(selectedCategory?.id)"
           :key="article.id"
@@ -194,5 +194,13 @@ const selectCategory = (category) => {
   z-index: -1;
   width: 200px;
   object-fit: cover;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

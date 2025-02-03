@@ -182,13 +182,14 @@
   
         <p class="text-gray-600 leading-relaxed mb-4">
           In consideration of Your use of the Platform, You agree: 
+        </p>
           <ul class="list-disc list-inside">
             <li>(a) that You are of legal age and have the capacity to agree to these Terms and furthermore, if You are a parent / legal guardian of a “minor” then in that event the compliance to the Applicable Law should be adhered to and Company reserves the legal rights to insert necessary protocols / check mechanism to enforce the foregoing including but not limited to the parental / legal guardian’s consent, if required under the Applicable Law and as detailed under the Privacy Policy;</li>
             <li>(b) to provide complete, accurate, current, and required information about You as may be prompted at the time of registration on the Platform ("Personal Data");</li>
             <li>(c) to maintain the security of Your password and identification;</li>
             <li>(d) to maintain and promptly update the Personal Data and any information You provide to Company, to keep it accurate, current and complete for providing the Services.</li>
           </ul>
-        </p>
+        
   
         <p class="text-gray-600 leading-relaxed mb-4">
           You are not permitted to use the Platform or submit Content to the Platform if You do not follow these Terms. If You provide any information that is untrue, inaccurate, unauthorized, not current, or incomplete (or becomes untrue, inaccurate, not current, or incomplete), or if the Company has reasonable grounds to suspect that such information is untrue, inaccurate, not current, or incomplete, the Company has the right to refuse any and all the Services.

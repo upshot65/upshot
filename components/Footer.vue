@@ -1,17 +1,17 @@
 <template>
   <footer
-    class="text-gray-700 py-10 px-6 mt-20 footer-section"
+    class="text-gray-700 py-10 px-6 pb-0 mt-20 footer-section"
     style="background-color: #f1eded"
   >
     <div
-      class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between space-y-10 md:space-y-0"
+      class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between space-y-10 md:space-y-0"
     >
       <!-- Left Section: Description and Social Icons -->
       <div
-        class="md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left space-y-4"
+        class="md:w-1/3 flex flex-col mt-[30px] max-w-[275px]  items-center md:items-start text-center md:text-left space-y-4"
       >
         <p class="text-gray-600">
-          Crafting Brands with Responsibility.
+          Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed 
         </p>
 
         <!-- Social Icons (Positioned below the description on all devices) -->
@@ -20,7 +20,7 @@
             href="category"
             aria-label="Twitter"
             target="_blank"
-           class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
+           class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 hover:bg-[#85B356] transition"
           >
             <i class="fab fa-twitter text-gray-600"></i>
           </a>
@@ -28,7 +28,7 @@
             href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"
             aria-label="Facebook"
             target="_blank"
-           class="p-2 rounded-full bg-gray-300 text-white hover:bg-green-600 transition"
+           class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 text-white hover:bg-[#85B356] transition"
           >
             <i class="fab fa-facebook-f"></i>
           </a>
@@ -36,7 +36,7 @@
             href="https://www.instagram.com/upshotbrandmedia/profilecard/?igsh=MWE4ZnRpc2ZxemIxMg%3D%3D"
             aria-label="Instagram"
             target="_blank"
-            class="p-2 rounded-full bg-gray-200 hover:bg-green-600 transition"
+            class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 hover:bg-[#85B356] transition"
           >
             <i class="fab fa-instagram text-gray-600"></i>
           </a>
@@ -150,7 +150,7 @@
 
     <!-- Bottom Section: Copyright -->
     <div
-      class="mt-10 mb-20 border-t border-gray-200 pt-6 text-center text-gray-500 text-sm"
+      class="mt-10  border-t border-gray-200 py-4 text-center text-gray-500 text-sm"
     >
       © Copyright 2024, All Rights Reserved
     </div>

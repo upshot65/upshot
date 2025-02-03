@@ -5,7 +5,7 @@
     </h2>
 
     <!-- Categories List -->
-    <div class="flex flex-wrap justify-center md:justify-start gap-6 mb-8">
+    <div class="flex flex-wrap justify-center md:justify-start w-full gap-6 mb-12">
       <div
         v-for="(category, index) in visibleCategories"
         :key="index"
@@ -14,7 +14,7 @@
       >
         <!-- Category Image (Circle) -->
         <div
-          class="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-4"
+          class="w-[220px] h-[220px]  rounded-full overflow-hidden border-4"
           :class="{
             'border-green-500':
               selectedCategory?.category?.name === category?.category?.name,
@@ -41,7 +41,7 @@
         class="cursor-pointer flex flex-col items-center space-y-2"
       >
         <div
-          class="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-full bg-gray-200 flex items-center justify-center text-blue-800 font-bold border-4 border-transparent"
+          class="w-[220px] h-[220px] rounded-full bg-gray-200 flex items-center justify-center text-blue-800 font-bold border-4 border-transparent"
         >
           Explore All
         </div>
@@ -80,6 +80,12 @@
         </p>
       </div>
     </div>
+    <div class="relative overflow-hidden cursor-pointer group w-fit">
+      <img src="/images/popular-main.png" alt="" class="transform transition duration-300 group-hover:scale-105" />
+      <div class="absolute bottom-0 left-[20px] text-white p-3 text-lg">
+        BTL Highlights
+      </div>
+    </div>
   </div>
 </template>
 
@@ -88,7 +94,7 @@ const articleStore = useArticleStore();
 const { categoriesWithLatest } = storeToRefs(articleStore);
 const router = useRouter();
 // Show a maximum of 5 categories in the first row
-const MAX_CATEGORIES_FIRST_ROW = 8;
+const MAX_CATEGORIES_FIRST_ROW = 4;
 
 const showAll = ref(false);
 const selectedCategory = useState("selectedCategory", () => null);

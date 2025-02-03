@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-start gap-4"
+    class=" p-4 rounded-lg flex flex-col md:flex-row items-start gap-4"
   >
     <!-- Article Image -->
     <NuxtImg
