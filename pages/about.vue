@@ -1,6 +1,6 @@
 <template>
   <div class="about-us-page py-10 px-6 md:px-16 lg:px-32">
-    <!-- Hero Section -->
+    <!--  Hero  Section -->
     <section class="text-center mb-12">
       <h1 class="text-4xl font-bold text-gray-800 mb-4">About Us</h1>
       <p class="text-lg leading-relaxed">
