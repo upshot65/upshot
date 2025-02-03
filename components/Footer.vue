@@ -4,12 +4,15 @@
     style="background-color: #f1eded"
   >
     <div
-      class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between space-y-10 md:space-y-0"
+      class="max-w-5xl mx-auto flex items-center flex-col md:flex-row justify-between space-y-10 md:space-y-0"
     >
       <!-- Left Section: Description and Social Icons -->
       <div
-        class="md:w-1/3 flex flex-col mt-[30px] max-w-[275px]  items-center md:items-start text-center md:text-left space-y-4"
+        class="md:w-1/3 flex flex-col max-w-[275px]  items-center md:items-start text-center md:text-left space-y-4"
       >
+        <NuxtLink to="/" class="text-xl font-bold">
+          <NuxtImg src="/logo.png" class="w-[169px]" alt="Logo" />
+        </NuxtLink>
         <p class="text-gray-600">
           Lorem ipsum dolor sit amet consectetur. Dapibus scelerisque phasellus habitant sed 
         </p>
@@ -22,7 +25,7 @@
             target="_blank"
            class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 hover:bg-[#85B356] transition"
           >
-            <i class="fab fa-twitter text-gray-600"></i>
+            <i class="fab fa-twitter text-white"></i>
           </a>
           <a
             href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"
@@ -38,7 +41,7 @@
             target="_blank"
             class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 hover:bg-[#85B356] transition"
           >
-            <i class="fab fa-instagram text-gray-600"></i>
+            <i class="fab fa-instagram text-white"></i>
           </a>
         </div>
       </div>

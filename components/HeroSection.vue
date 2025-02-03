@@ -7,36 +7,36 @@
     </h1>
 
     <!-- Masonry Grid Layout -->
-    <div class="grid max-h-[648px] overflow-hidden z-[30] relative layout-grid-banner grid-cols-2 md:grid-cols-5 gap-3 w-full mt-6 mx-auto justify-items-center">
+    <div class="grid max-h-[648px] overflow-hidden z-[30] relative layout-grid-banner grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 w-full mt-6 mx-auto justify-items-center">
       <div class="grid gap-3 w-full">
         <div v-for="(image, index) in leftColumn" :key="'left-' + index">
           <img :src="image" 
-            class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer" 
+            class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" 
             alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid w-full gap-3 pt-[150px]">
         <div v-for="(image, index) in middleLeftColumn" :key="'middle-left-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer" alt="Gallery Image" />
+          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid w-full gap-3 pt-[260px]">
         <div class="w-full" v-for="(image, index) in middleRightColumn" :key="'middle-right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer" alt="Gallery Image" />
+          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid gap-3 w-full pt-[150px]">
         <div v-for="(image, index) in rightColumn" :key="'right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer" alt="Gallery Image" />
+          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid gap-3 w-full">
         <div v-for="(image, index) in lastColumn" :key="'right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer" alt="Gallery Image" />
+          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
     </div>

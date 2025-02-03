@@ -33,7 +33,7 @@
             target="_blank"
             class="p-2 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 hover:bg-[#85B356]  transition"
           >
-            <i class="fab fa-twitter text-gray-600"></i>
+            <i class="fab fa-twitter text-white"></i>
           </a>
           <a
             href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"
@@ -49,7 +49,7 @@
             target="_blank"
             class="p-2 flex h-10 w-10 items-center justify-center  rounded-full bg-gray-300 hover:bg-[#85B356]  transition"
           >
-            <i class="fab fa-instagram text-gray-600"></i>
+            <i class="fab fa-instagram text-white"></i>
           </a>
           <a
             href="https://www.linkedin.com/company/upshotbrandmediallp/"
@@ -57,7 +57,7 @@
             target="_blank"
             class="p-2 flex h-10 w-10 items-center justify-center  rounded-full bg-gray-300 hover:bg-[#85B356]  transition"
           >
-            <i class="fab fa-linkedin text-gray-600"></i>
+            <i class="fab fa-linkedin text-white"></i>
           </a>
         </div>
       </div>

@@ -26,59 +26,57 @@
       </div>
     </section>
 
+ <!-- Team Carousel -->
     <section class="py-12 bg-white text-center">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-6">Meet Our Team</h2>
-      <div class="grid grid-cols-3 gap-6">
-        <div v-for="(member, index) in team" :key="index" class="bg-white rounded-lg p-6 text-left">
-          <img :src="member.image" alt="member.name" class="w-full h-60 object-cover rounded-md mb-4" />
-          <h3 class="text-lg font-semibold text-blue-600">{{ member.name }}</h3>
-          <p class="text-gray-500 text-sm mb-2">{{ member.role }}</p>
-          <p class="text-gray-600 text-xs">{{ member.description }}</p>
-        </div>
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-6">Meet Our Team</h2>
+        <Swiper
+          :slidesPerView="3"
+          :spaceBetween="20"
+          :loop="true"
+          :pagination="{ clickable: true }"
+          :navigation="true"
+          :autoplay="{ delay: 3000 }"
+          :modules="modules"
+          class="team-carousel"
+        >
+          <SwiperSlide v-for="(member, index) in team" :key="index">
+            <div class="bg-white rounded-lg p-6 text-left">
+              <img :src="member.image" :alt="member.name" class="w-full h-60 object-cover rounded-md mb-4" />
+              <h3 class="text-lg font-semibold text-blue-600">{{ member.name }}</h3>
+              <p class="text-gray-500 text-sm mb-2">{{ member.role }}</p>
+              <p class="text-gray-600 text-xs">{{ member.description }}</p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
-      <div class="flex justify-center mt-6 space-x-4">
-        <button class="p-2 rounded-full"><img src="/images/previous.png" alt=""/></button>
-        <button class="p-2 rounded-full"><img src="/images/next.png" alt=""/></button>
-      </div>
-    </div>
-  </section>
-    <!-- Expertise Section
-    <section class="mb-12 flex flex-col items-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
-        Our Expertise
-      </h2>
-      <ul class="space-y-4 list-disc list-inside md:text-lg">
-        <li>Personal Branding Expert</li>
-        <li>Events & Marketing Customization</li>
-        <li>Concept Creation Visualizer</li>
-        <li>Digital Brand Creators</li>
-      </ul>
     </section>
-
-    Mission Section 
-    <section class="text-center">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Our Mission</h2>
-      <p class="text-lg leading-relaxed">
-        UBM helps businesses reach their brand goals, connect with target
-        audiences via community activations, and have a 360° approach toward
-        reaching brand goals.
-      </p>
-    </section> -->
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/autoplay"; // Import autoplay styles
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+// Register Swiper modules
+const modules = [Navigation, Pagination, Autoplay];
+
 const items = [
-  { image: '/images/personal-branding.jpg', title: 'Personal Branding Expert' },
-  { image: '/images/concept-events.png', title: 'Concept Events & Marketing' },
-  { image: '/images/concept-visualizer.png', title: 'Concept Creation Visualizer' },
-  { image: '/images/digital-brand.png', title: 'Digital Brand Creators' }
+  { image: "/images/personal-branding.jpg", title: "Personal Branding Expert" },
+  { image: "/images/concept-events.png", title: "Concept Events & Marketing" },
+  { image: "/images/concept-visualizer.png", title: "Concept Creation Visualizer" },
+  { image: "/images/digital-brand.png", title: "Digital Brand Creators" },
 ];
+
 const team = [
-  { image: '/images/team-member-1.jpg', name: 'Moomal Sisodia', role: 'Founder & CEO', description: 'Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals' },
-  { image: '/images/team-member-2.jpg', name: 'Aditi Gupta', role: 'Lead Advisor - Strategic Partnerships', description: '15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group' },
-  { image: '/images/team-member-3.jpg', name: 'Nisha Sharma', role: 'Partner & Promoter', description: 'M.Sc., M.Tech from NIT Kurukshetra' }
+  { image: "/images/team-member-1.jpg", name: "Moomal Sisodia", role: "Founder & CEO", description: "Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals" },
+  { image: "/images/team-member-2.jpg", name: "Aditi Gupta", role: "Lead Advisor - Strategic Partnerships", description: "15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group" },
+  { image: "/images/team-member-3.jpg", name: "Nisha Sharma", role: "Partner & Promoter", description: "M.Sc., M.Tech from NIT Kurukshetra" },
+  { image: "/images/team-member-2.jpg", name: "Kavita SIngh", role: "Content Lead", description: "16+ yrs of Content building experience" },
 ];
 </script>
 
@@ -86,7 +84,7 @@ const team = [
 .about-img-wrapper::after {
   content: "";
   position: absolute;
-  background: url('/images/about-star.png');
+  background: url("/images/about-star.png");
   right: -90px;
   left: auto;
   width: 100%;

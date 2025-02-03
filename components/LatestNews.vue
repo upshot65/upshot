@@ -16,15 +16,23 @@
           <NuxtLink
             :to="`/articles/${article.id}-${generateSlug(article.title)}`"
           >
-            <div class="web-latest-news-section-cards-card-image">
-              <NuxtImg
-                :src="article.header_image"
-                :alt="article.title"
-                class="w-full h-full object-cover rounded-xl"
-                densities="x1 x2"
-                quality="100"
-              />
-
+            <div               :class="{
+                '!h-full': index === 0,
+              }" class="web-latest-news-section-cards-card-image h-[238px]">
+              <div
+              :class="{
+                '!h-full': index === 0,
+              }"
+               class="w-full h-[238px]"
+               >
+                <NuxtImg
+                  :src="article.header_image"
+                  :alt="article.title"
+                  class="w-full h-full object-cover rounded-xl"
+                  densities="x1 x2"
+                  quality="100"
+                />
+              </div>
               <!-- Category Badge -->
               <div class="web-latest-news-section-cards-card-content">
                 <span
@@ -36,12 +44,24 @@
               </div>
             </div>
             <div
-              class="p-4 absolute bottom-3 left-3 latest-news-content-morphisam"
+            :class="{
+            '!bg-gray-500 absolute bottom-0 left-0 w-full opacity-90': index === 0,
+          }"
+              class="p-4 w-full !text-black latest-news-content-morphisam"
             >
-              <h3 class="text-lg font-bold text-white mb-2">
+              <h3
+              :class="{
+                '!text-white': index === 0,
+              }"
+               class="text-lg !text-black font-bold  mb-2"
+               >
                 {{ article.title }}
               </h3>
-              <p class="text-white text-sm">
+              <p
+              :class="{
+                '!text-white': index === 0,
+              }"
+              class="!text-black text-sm">
                 {{ article.description }}
               </p>
             </div>
@@ -131,9 +151,9 @@ const { latestArticles } = storeToRefs(articleStore);
 }
 .web-latest-news-section-cards-card-image {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   object-fit: contain;
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   transition: transform 0.5s ease-in-out;
 }
 
