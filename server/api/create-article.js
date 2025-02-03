@@ -1,16 +1,16 @@
 import { serverSupabaseClient } from "#supabase/server";
 
 // Initialize Supabase Client
-
 export default defineEventHandler(async (event) => {
   // Read request body
   const body = await readBody(event);
 
+  console.log(body);
   // Validate input
   if (!body.title || !body.content) {
     return {
       status: 400,
-      message: "Title and content are required.",
+      message: "Title and content a re required.",
     };
   }
   const supabase = await serverSupabaseClient(event);
