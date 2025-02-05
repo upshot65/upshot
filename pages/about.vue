@@ -73,10 +73,10 @@ const items = [
 ];
 
 const team = [
-  { image: "/images/team-member-1.jpg", name: "Moomal Sisodia", role: "Founder & CEO", description: "Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals" },
-  { image: "/images/team-member-2.jpg", name: "Aditi Gupta", role: "Lead Advisor - Strategic Partnerships", description: "15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group" },
-  { image: "/images/team-member-3.jpg", name: "Nisha Sharma", role: "Partner & Promoter", description: "M.Sc., M.Tech from NIT Kurukshetra" },
-  { image: "/images/team-member-2.jpg", name: "Kavita SIngh", role: "Content Lead", description: "16+ yrs of Content building experience" },
+  { image: "/images/Moomal.jpg", name: "Moomal Sisodia", role: "Founder & CEO", description: "Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals" },
+  { image: "/images/Aditi-gupta.jpg", name: "Aditi Gupta", role: "Lead Advisor - Strategic Partnerships", description: "15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group" },
+  { image: "/images/Nisha.jpg", name: "Nisha Sharma", role: "Partner & Promoter", description: "M.Sc., M.Tech from NIT Kurukshetra" },
+  { image: "/images/Kavita-jhala.jpg", name: "Kavita SIngh", role: "Content Lead", description: "16+ yrs of Content building experience" },
 ];
 </script>
 

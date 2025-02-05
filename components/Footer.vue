@@ -20,12 +20,12 @@
         <!-- Social Icons (Positioned below the description on all devices) -->
         <div class="flex justify-center md:justify-start space-x-4">
           <a
-            href="category"
-            aria-label="Twitter"
+            href="https://www.linkedin.com/company/upshotbrandmediallp/"
+            aria-label="LinkedIn"
             target="_blank"
-           class="p-2 rounded-full flex items-center justify-center h-10 w-10 bg-gray-300 hover:bg-[#85B356] transition"
+            class="p-2 flex h-10 w-10 items-center justify-center  rounded-full bg-gray-300 hover:bg-[#85B356]  transition"
           >
-            <i class="fab fa-twitter text-white"></i>
+            <i class="fab fa-linkedin text-white"></i>
           </a>
           <a
             href="https://www.facebook.com/Upshotbrandmediallp?mibextid=ZbWKwL"

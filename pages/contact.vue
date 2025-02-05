@@ -156,4 +156,16 @@ async function submitForm() {
 
 <style scoped>
 /* Add any custom styles specific to this page if needed */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+  border: 1px solid #cccccc91;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+}
+
 </style>
