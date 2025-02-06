@@ -28,9 +28,32 @@
     <aside class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm">
       <h2 class="text-lg font-semibold mb-3">Select Category</h2>
       <div class="flex flex-wrap gap-2">
-        <span v-for="category in categories" :key="category" class="px-3 py-1 bg-green-300 text-black rounded-full cursor-pointer hover:bg-green-400">{{ category }}</span>
-        <button class="px-3 py-1 border border-gray-400 rounded-full">Add new +</button>
-      </div>
+    <span 
+      v-for="category in categories" 
+      :key="category" 
+      class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
+    >
+      {{ category }}
+    </span>
+    
+    <button 
+      @click="showInput = true" 
+      v-if="!showInput"
+      class="px-3 py-1 border border-gray-400 rounded-full"
+    >
+      Add new +
+    </button>
+
+    <input 
+      v-if="showInput"
+      v-model="newCategory"
+      @keyup.enter="addCategory"
+      @blur="addCategory"
+      type="text" 
+      placeholder="Enter category"
+      class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
+    />
+  </div>
       <h2 class="text-lg font-semibold mt-6">Add tags</h2>
       <input
         type="text"
@@ -49,6 +72,16 @@ const title = ref("");
 const body = ref("");
 const loading = ref(false);
 const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
+const newCategory = ref("");
+const showInput = ref(false);
+
+const addCategory = () => {
+  if (newCategory.value.trim()) {
+    categories.value.push(newCategory.value.trim());
+  }
+  newCategory.value = "";
+  showInput.value = false;
+};
 
 const addArticle = async () => {
   if (!title.value.trim() || !body.value.trim()) {
