@@ -8,9 +8,18 @@
         placeholder="Enter article title"
         class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
+      <textarea
+        v-model="description"
+        placeholder="Enter article description..."
+        class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      ></textarea>
       <ClientOnly>
         <Quill v-model:content="body" />
       </ClientOnly>
+      <div class="flex items-center gap-2 mt-4">
+        <input type="checkbox" v-model="isFeatured" id="featured" class="w-4 h-4" />
+        <label for="featured" class="text-sm font-medium">Mark as Featured</label>
+      </div>
       <div class="flex gap-3 mt-6">
         <button
           @click="addArticle"
@@ -28,32 +37,32 @@
     <aside class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm">
       <h2 class="text-lg font-semibold mb-3">Select Category</h2>
       <div class="flex flex-wrap gap-2">
-    <span 
-      v-for="category in categories" 
-      :key="category" 
-      class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
-    >
-      {{ category }}
-    </span>
-    
-    <button 
-      @click="showInput = true" 
-      v-if="!showInput"
-      class="px-3 py-1 border border-gray-400 rounded-full"
-    >
-      Add new +
-    </button>
+        <span 
+          v-for="category in categories" 
+          :key="category" 
+          class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
+        >
+          {{ category }}
+        </span>
+        
+        <button 
+          @click="showInput = true" 
+          v-if="!showInput"
+          class="px-3 py-1 border border-gray-400 rounded-full"
+        >
+          Add new +
+        </button>
 
-    <input 
-      v-if="showInput"
-      v-model="newCategory"
-      @keyup.enter="addCategory"
-      @blur="addCategory"
-      type="text" 
-      placeholder="Enter category"
-      class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
-    />
-  </div>
+        <input 
+          v-if="showInput"
+          v-model="newCategory"
+          @keyup.enter="addCategory"
+          @blur="addCategory"
+          type="text" 
+          placeholder="Enter category"
+          class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
+        />
+      </div>
       <h2 class="text-lg font-semibold mt-6">Add tags</h2>
       <input
         type="text"
@@ -69,8 +78,10 @@ import { ref } from "vue";
 import { useFetch } from "#app";
 
 const title = ref("");
+const description = ref("");
 const body = ref("");
 const loading = ref(false);
+const isFeatured = ref(false);
 const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
 const newCategory = ref("");
 const showInput = ref(false);
@@ -94,8 +105,9 @@ const addArticle = async () => {
       method: "POST",
       body: JSON.stringify({
         title: title.value,
+        description: description.value,
         content: body.value,
-        description: "Automatically added from editor",
+        isFeatured: isFeatured.value,
       }),
       headers: { "Content-Type": "application/json" },
     });
@@ -105,7 +117,9 @@ const addArticle = async () => {
     } else {
       alert("Article added successfully!");
       title.value = "";
+      description.value = "";
       body.value = "";
+      isFeatured.value = false;
     }
   } catch (error) {
     console.error("Request failed:", error);
