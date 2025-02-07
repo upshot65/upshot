@@ -34,6 +34,11 @@
       <div class="flex items-center gap-2 mt-4">
         <input type="checkbox" v-model="isFeatured" id="featured" class="w-4 h-4" />
         <label for="featured" class="text-sm font-medium">Mark as Featured</label>
+         <!-- Show selected category -->
+         
+         <span v-if="currCategory" class="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-sm">
+          Category --> {{ currCategory.name }}
+        </span>
       </div>
 
       <div class="flex gap-3 mt-6">
@@ -55,10 +60,12 @@
       <div class="flex flex-wrap gap-2">
         <span 
           v-for="category in categories" 
-          :key="category" 
+          :key="category.id" 
           class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
+          :class="{ 'bg-green-600 text-white': currCategory === category.name }"
+          @click="setCategory(category)" 
         >
-          {{ category }}
+          {{ category.name }}
         </span>
         
         <button 
@@ -90,8 +97,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useFetch } from "#app";
+import { ref, onMounted } from "vue";
 
 
 const supabase = useSupabaseClient();
@@ -103,15 +109,28 @@ const loading = ref(false);
 const isFeatured = ref(false);
 const headerImageUrl = ref("");
 const imageLoading = ref(false);
-const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
+const categories = ref([]); // Fetch categories from API
 const newCategory = ref("");
 const showInput = ref(false);
+const currCategory = ref(null); // Store selected category object
 
+// Fetch Categories on Page Load
+const fetchCategories = async () => {
+  try {
+    const { data, error } = await supabase.from("category").select("*");
+    if (error) throw error;
+    categories.value = data;
+  } catch (error) {
+    console.error("Error fetching categories:", error.message);
+  }
+};
+
+// Upload Image to Supabase Storage
 const uploadImage = async (event) => {
   const file = event.target.files[0];
   if (!file) return;
 
-  imageLoading.value = true; // Start loading state
+  imageLoading.value = true;
 
   const { data, error } = await supabase.storage.from("articlesImage").upload(`headers/${file.name}`, file, {
     cacheControl: "3600",
@@ -125,58 +144,83 @@ const uploadImage = async (event) => {
     return;
   }
 
-  // Get the public URL
+  // Get Public URL
   const { data: publicUrlData } = supabase.storage.from("articlesImage").getPublicUrl(data.path);
   headerImageUrl.value = publicUrlData.publicUrl;
 
   alert("✅ Image uploaded successfully!");
-  imageLoading.value = false; // Stop loading state
+  imageLoading.value = false;
 };
 
-const addCategory = () => {
-  if (newCategory.value.trim()) {
-    categories.value.push(newCategory.value.trim());
+// Add a New Category
+const addCategory = async () => {
+  const trimmedCategory = newCategory.value.trim();
+  if (!trimmedCategory) return;
+
+  try {
+    const { data, error } = await supabase
+      .from("categories")
+      .insert([{ name: trimmedCategory }])
+      .select("*")
+      .single();
+
+    if (error) throw error;
+    
+    categories.value.push(data);
+    newCategory.value = "";
+    showInput.value = false;
+  } catch (error) {
+    console.error("Error adding category:", error.message);
+    alert("Failed to add category.");
   }
-  newCategory.value = "";
-  showInput.value = false;
 };
 
+// Set Selected Category
+const setCategory = (category) => {
+  currCategory.value = category;
+  console.log("Selected Category:", category);
+};
+
+// Submit Article
 const addArticle = async () => {
-  if (!title.value.trim() || !body.value.trim()) {
-    alert("Title and content cannot be empty.");
+  if (!title.value.trim() || !body.value.trim() || !currCategory.value) {
+    alert("Title, content, and category are required!");
     return;
   }
+
   loading.value = true;
   try {
-    const response = await useFetch("/api/create-article", {
-      method: "POST",
-      body: JSON.stringify({
+    const { data, error } = await supabase.from("article").insert([
+      {
         title: title.value,
         description: description.value,
         content: body.value,
-        isFeatured: isFeatured.value,
+        is_featured: isFeatured.value,
         header_image: headerImageUrl.value,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.error.value) {
-      console.error("Error:", response.error.value);
-      alert("Failed to add article");
-    } else {
-      alert("✅ Article added successfully!");
-      title.value = "";
-      description.value = "";
-      body.value = "";
-      isFeatured.value = false;
-      headerImageUrl.value = "";
-    }
+        category_id: currCategory.value.id,
+        active:true
+      },
+    ]);
+
+    if (error) throw error;
+
+    alert("✅ Article added successfully!");
+    title.value = "";
+    description.value = "";
+    body.value = "";
+    isFeatured.value = false;
+    headerImageUrl.value = "";
+    currCategory.value = null;
   } catch (error) {
-    console.error("Request failed:", error);
-    alert("An error occurred. Please try again.");
+    console.error("Error submitting article:", error.message);
+    alert("Failed to submit article.");
   } finally {
     loading.value = false;
   }
 };
+
+// Fetch categories when the component is mounted
+onMounted(fetchCategories);
 </script>
 
 <style scoped>
