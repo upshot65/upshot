@@ -22,7 +22,8 @@ export default defineEventHandler(async (event) => {
       description: body.description || "",
       created_at: new Date().toISOString(),
       is_featured: !!body.isFeatured,
-      active: true
+      active: true,
+      category_id: 1
     },
   ]);
 
