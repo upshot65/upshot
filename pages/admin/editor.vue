@@ -13,13 +13,29 @@
         placeholder="Enter article description..."
         class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
       ></textarea>
+      
+      <!-- Header Image Upload -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-2">Upload Header Image</label>
+        <input 
+          type="file" 
+          @change="uploadImage" 
+          :disabled="imageLoading"
+          class="w-full p-2 border border-gray-300 rounded-md cursor-pointer disabled:opacity-50"
+        />
+        <p v-if="imageLoading" class="text-sm text-blue-500 mt-2">Uploading image...</p>
+        <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">✅ Image uploaded successfully!</p>
+      </div>
+      
       <ClientOnly>
         <Quill v-model:content="body" />
       </ClientOnly>
+
       <div class="flex items-center gap-2 mt-4">
         <input type="checkbox" v-model="isFeatured" id="featured" class="w-4 h-4" />
         <label for="featured" class="text-sm font-medium">Mark as Featured</label>
       </div>
+
       <div class="flex gap-3 mt-6">
         <button
           @click="addArticle"
@@ -77,14 +93,45 @@
 import { ref } from "vue";
 import { useFetch } from "#app";
 
+
+const supabase = useSupabaseClient();
+
 const title = ref("");
 const description = ref("");
 const body = ref("");
 const loading = ref(false);
 const isFeatured = ref(false);
+const headerImageUrl = ref("");
+const imageLoading = ref(false);
 const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
 const newCategory = ref("");
 const showInput = ref(false);
+
+const uploadImage = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  imageLoading.value = true; // Start loading state
+
+  const { data, error } = await supabase.storage.from("articlesImage").upload(`headers/${file.name}`, file, {
+    cacheControl: "3600",
+    upsert: true,
+  });
+
+  if (error) {
+    console.error("Upload error:", error);
+    alert("Failed to upload image");
+    imageLoading.value = false;
+    return;
+  }
+
+  // Get the public URL
+  const { data: publicUrlData } = supabase.storage.from("articlesImage").getPublicUrl(data.path);
+  headerImageUrl.value = publicUrlData.publicUrl;
+
+  alert("✅ Image uploaded successfully!");
+  imageLoading.value = false; // Stop loading state
+};
 
 const addCategory = () => {
   if (newCategory.value.trim()) {
@@ -108,6 +155,7 @@ const addArticle = async () => {
         description: description.value,
         content: body.value,
         isFeatured: isFeatured.value,
+        header_image: headerImageUrl.value,
       }),
       headers: { "Content-Type": "application/json" },
     });
@@ -115,11 +163,12 @@ const addArticle = async () => {
       console.error("Error:", response.error.value);
       alert("Failed to add article");
     } else {
-      alert("Article added successfully!");
+      alert("✅ Article added successfully!");
       title.value = "";
       description.value = "";
       body.value = "";
       isFeatured.value = false;
+      headerImageUrl.value = "";
     }
   } catch (error) {
     console.error("Request failed:", error);
