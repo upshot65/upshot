@@ -6,6 +6,11 @@ const title = computed(() => {
 const content = computed(() => {
   return `Read the latest articles in ${selectedCategory?.value?.name}.`;
 });
+
+  definePageMeta({
+  layout: "default", // ✅ Use the default layout
+});
+  
 useHead({
   title,
   meta: [
