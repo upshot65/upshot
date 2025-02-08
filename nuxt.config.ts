@@ -11,8 +11,8 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@pinia/nuxt",
   ],
-  
-    router: {
+
+  router: {
     options: {
       middleware: ["loadStoreData.global"],
     },
@@ -59,7 +59,8 @@ export default defineNuxtConfig({
     pass: process.env.EMAIL_PASS, // Password is now taken from environment variables
     // Exposed to client and server
     public: {
-      publicApiKey: process.env.PUBLIC_API_FOR_EMAIL,
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_KEY,
     },
   },
 });
