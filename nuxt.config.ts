@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     siteUrl: "https://www.upshotbrandmedia.com", // Replace with your actual domain
     debug: true,
     autoLastmod: true,
+    exclude: ["/admin/**", "/admin"],
     urls: async () => {
       const articles = await fetchArticles();
       return articles.map((article) => ({
