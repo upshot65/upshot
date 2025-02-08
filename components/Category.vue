@@ -129,7 +129,7 @@ const articlesPerPage = 10;
 onMounted(async () => {
   if (selectedCategory.value) {
     await categoryStore.fetchArticles(
-      selectedCategory.value.id,
+      selectedCategory.value.id || 1,
       currentPage.value,
       articlesPerPage
     );
