@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
     "@pinia/nuxt",
   ],
+  
+    router: {
+    options: {
+      middleware: ["loadStoreData.global"],
+    },
+  },
   nitro: {
     prerender: {
       ignore: ["/admin/category"], // Ignore this route from prerendering
