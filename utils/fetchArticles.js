@@ -1,10 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 export async function fetchArticles() {
+  const config = useRuntimeConfig();
+  const supabaseUrl = config.public.supabaseUrl;
+  const supabaseKey = config.public.supabaseAnonKey;
+  const supabase = createClient(supabaseUrl, supabaseKey);
   const { data, error } = await supabase
     .from("article")
     .select("id, title, updated_at");
