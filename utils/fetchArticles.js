@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-
+import { useRuntimeConfig } from '#imports'
 export async function fetchArticles() {
   const config = useRuntimeConfig();
   const supabaseUrl = config.public.supabaseUrl;
