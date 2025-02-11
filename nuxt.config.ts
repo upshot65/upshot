@@ -2,6 +2,8 @@ import { fetchArticles } from "./utils/fetchArticles";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  components: true, // Auto-imports components
+  pages: true,
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   modules: [
