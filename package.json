@@ -16,6 +16,7 @@
     "@nuxtjs/supabase": "^1.4.1",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.7.0",
+     "@vueup/vue-quill": "^1.2.0",
     "@vueuse/core": "^11.2.0",
     "bcryptjs": "^2.4.3",
     "lodash-es": "^4.17.21",
