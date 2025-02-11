@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+/*import { createClient } from "@supabase/supabase-js";
 import { useRuntimeConfig } from '#imports'
 export async function fetchArticles() {
   const config = useRuntimeConfig();
@@ -16,3 +16,4 @@ export async function fetchArticles() {
 
   return data;
 }
+*/
