@@ -30,13 +30,13 @@ export default defineNuxtConfig({
     debug: true,
     autoLastmod: true,
     exclude: ["/admin/**", "/admin"],
-    urls: async () => {
+   /* urls: async () => {
       const articles = await fetchArticles();
       return articles.map((article) => ({
         loc: `/articles/${article.id}-${generateSlug(article.title)}`,
         lastmod: article.updated_at,
       }));
-    },
+    },*/
   },
   supabase: {
     redirect: false,
