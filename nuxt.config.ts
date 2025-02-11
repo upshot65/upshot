@@ -1,4 +1,4 @@
-import { fetchArticles } from "./utils/fetchArticles";
+//import { fetchArticles } from "./utils/fetchArticles";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
