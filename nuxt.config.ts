@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
   ],
 
+  nitro: {
+    preset: "vercel",
+  },
   router: {
     options: {
       middleware: ["loadStoreData.global"],
