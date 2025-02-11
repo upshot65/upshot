@@ -97,6 +97,11 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+  layout: "default",
+});
+  
 import { ref, onMounted } from "vue";
 
 
@@ -219,6 +224,8 @@ const addArticle = async () => {
   }
 };
 
+
+  
 // Fetch categories when the component is mounted
 onMounted(fetchCategories);
 </script>
