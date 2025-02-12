@@ -112,13 +112,13 @@ const loading = ref(false);
 const isFeatured = ref(false);
 const headerImageUrl = ref("");
 const imageLoading = ref(false);
-const categories = ref([]); // Fetch categories from API
+const categories = ref([{id:1,name:"Technology"}]); // Fetch categories from API
 const newCategory = ref("");
 const showInput = ref(false);
 const currCategory = ref(null); // Store selected category object
 
 // Fetch Categories on Page Load
-const fetchCategories = async () => {
+/*const fetchCategories = async () => {
   try {
     const { data, error } = await supabase.from("category").select("*");
     if (error) throw error;
@@ -127,6 +127,7 @@ const fetchCategories = async () => {
     console.error("Error fetching categories:", error.message);
   }
 };
+*/
 
 // Upload Image to Supabase Storage
 const uploadImage = async (event) => {
@@ -223,7 +224,7 @@ const addArticle = async () => {
 };
 
 // Fetch categories when the component is mounted
-onMounted(fetchCategories);
+//onMounted(fetchCategories);
 </script>
 
 <style scoped>
