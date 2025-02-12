@@ -99,7 +99,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-
+definePageMeta({
+  layout: "admin",
+});
+  
 const supabase = useSupabaseClient();
 
 const title = ref("");
