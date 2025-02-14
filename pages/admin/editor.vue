@@ -13,30 +13,46 @@
         placeholder="Enter article description..."
         class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
       ></textarea>
-      
+
       <!-- Header Image Upload -->
       <div class="mb-4">
-        <label class="block text-sm font-medium mb-2">Upload Header Image</label>
-        <input 
-          type="file" 
-          @change="uploadImage" 
+        <label class="block text-sm font-medium mb-2"
+          >Upload Header Image</label
+        >
+        <input
+          type="file"
+          @change="uploadImage"
           :disabled="imageLoading"
           class="w-full p-2 border border-gray-300 rounded-md cursor-pointer disabled:opacity-50"
         />
-        <p v-if="imageLoading" class="text-sm text-blue-500 mt-2">Uploading image...</p>
-        <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">✅ Image uploaded successfully!</p>
+        <p v-if="imageLoading" class="text-sm text-blue-500 mt-2">
+          Uploading image...
+        </p>
+        <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">
+          ✅ Image uploaded successfully!
+        </p>
       </div>
-      
+
       <ClientOnly>
-      <Quill v-model:content="body" />
-     </ClientOnly>
+        <Quill v-model:content="body" />
+      </ClientOnly>
 
       <div class="flex items-center gap-2 mt-4">
-        <input type="checkbox" v-model="isFeatured" id="featured" class="w-4 h-4" />
-        <label for="featured" class="text-sm font-medium">Mark as Featured</label>
-         <!-- Show selected category -->
-         
-         <span v-if="currCategory" class="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-sm">
+        <input
+          type="checkbox"
+          v-model="isFeatured"
+          id="featured"
+          class="w-4 h-4"
+        />
+        <label for="featured" class="text-sm font-medium"
+          >Mark as Featured</label
+        >
+        <!-- Show selected category -->
+
+        <span
+          v-if="currCategory"
+          class="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-sm"
+        >
           Category --> {{ currCategory.name }}
         </span>
       </div>
@@ -46,42 +62,52 @@
           @click="addArticle"
           :disabled="loading"
           class="px-5 py-2 rounded-full font-semibold transition-colors"
-          :class="loading ? 'bg-gray-500 text-white' : 'bg-blue-600 text-white hover:bg-blue-800'"
+          :class="
+            loading
+              ? 'bg-gray-500 text-white'
+              : 'bg-blue-600 text-white hover:bg-blue-800'
+          "
         >
           {{ loading ? "Submitting..." : "Publish" }}
         </button>
-        <button class="px-5 py-2 rounded-full bg-gray-200 text-black font-semibold">Save Draft</button>
+        <button
+          class="px-5 py-2 rounded-full bg-gray-200 text-black font-semibold"
+        >
+          Save Draft
+        </button>
       </div>
     </section>
-    
+
     <!-- Sidebar Section -->
-    <aside class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm">
+    <aside
+      class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm"
+    >
       <h2 class="text-lg font-semibold mb-3">Select Category</h2>
       <div class="flex flex-wrap gap-2">
-        <span 
-          v-for="category in categories" 
-          :key="category.id" 
+        <span
+          v-for="category in categories"
+          :key="category.id"
           class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
           :class="{ 'bg-green-600 text-white': currCategory === category.name }"
-          @click="setCategory(category)" 
+          @click="setCategory(category)"
         >
           {{ category.name }}
         </span>
-        
-        <button 
-          @click="showInput = true" 
+
+        <button
+          @click="showInput = true"
           v-if="!showInput"
           class="px-3 py-1 border border-gray-400 rounded-full"
         >
           Add new +
         </button>
 
-        <input 
+        <input
           v-if="showInput"
           v-model="newCategory"
           @keyup.enter="addCategory"
           @blur="addCategory"
-          type="text" 
+          type="text"
           placeholder="Enter category"
           class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
         />
@@ -98,24 +124,17 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import Quill from "~/components/Quill.vue";
-
 const supabase = useSupabaseClient();
-
-const title = ref("");
-const description = ref("");
-const body = ref("");
-const loading = ref(false);
 const isFeatured = ref(false);
 const headerImageUrl = ref("");
 const imageLoading = ref(false);
-const categories = ref([{id:1,name:"Technology"}]); // Fetch categories from API
+// const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
+const categories = ref([]); // Fetch categories from API
 const newCategory = ref("");
 const showInput = ref(false);
 const currCategory = ref(null); // Store selected category object
-
 // Fetch Categories on Page Load
-/*const fetchCategories = async () => {
+const fetchCategories = async () => {
   try {
     const { data, error } = await supabase.from("category").select("*");
     if (error) throw error;
@@ -124,32 +143,32 @@ const currCategory = ref(null); // Store selected category object
     console.error("Error fetching categories:", error.message);
   }
 };
-*/
-
 // Upload Image to Supabase Storage
 const uploadImage = async (event) => {
   const file = event.target.files[0];
   if (!file) return;
-
+  imageLoading.value = true; // Start loading state
   imageLoading.value = true;
-
-  const { data, error } = await supabase.storage.from("articlesImage").upload(`headers/${file.name}`, file, {
-    cacheControl: "3600",
-    upsert: true,
-  });
-
+  const { data, error } = await supabase.storage
+    .from("articlesImage")
+    .upload(`headers/${file.name}`, file, {
+      cacheControl: "3600",
+      upsert: true,
+    });
   if (error) {
     console.error("Upload error:", error);
     alert("Failed to upload image");
     imageLoading.value = false;
     return;
   }
-
+  // Get the public URL
   // Get Public URL
-  const { data: publicUrlData } = supabase.storage.from("articlesImage").getPublicUrl(data.path);
+  const { data: publicUrlData } = supabase.storage
+    .from("articlesImage")
+    .getPublicUrl(data.path);
   headerImageUrl.value = publicUrlData.publicUrl;
-
   alert("✅ Image uploaded successfully!");
+  imageLoading.value = false; // Stop loading state
   imageLoading.value = false;
 };
 
@@ -157,16 +176,14 @@ const uploadImage = async (event) => {
 const addCategory = async () => {
   const trimmedCategory = newCategory.value.trim();
   if (!trimmedCategory) return;
-
   try {
     const { data, error } = await supabase
       .from("categories")
       .insert([{ name: trimmedCategory }])
       .select("*")
       .single();
-
     if (error) throw error;
-    
+
     categories.value.push(data);
     newCategory.value = "";
     showInput.value = false;
@@ -175,20 +192,17 @@ const addCategory = async () => {
     alert("Failed to add category.");
   }
 };
-
 // Set Selected Category
 const setCategory = (category) => {
   currCategory.value = category;
   console.log("Selected Category:", category);
 };
-
 // Submit Article
 const addArticle = async () => {
   if (!title.value.trim() || !body.value.trim() || !currCategory.value) {
     alert("Title, content, and category are required!");
     return;
   }
-
   loading.value = true;
   try {
     const { data, error } = await supabase.from("article").insert([
@@ -198,13 +212,12 @@ const addArticle = async () => {
         content: body.value,
         is_featured: isFeatured.value,
         header_image: headerImageUrl.value,
+
         category_id: currCategory.value.id,
-        active:true
+        active: true,
       },
     ]);
-
     if (error) throw error;
-
     alert("✅ Article added successfully!");
     title.value = "";
     description.value = "";
@@ -219,9 +232,8 @@ const addArticle = async () => {
     loading.value = false;
   }
 };
-
 // Fetch categories when the component is mounted
-//onMounted(fetchCategories);
+onMounted(fetchCategories);
 </script>
 
 <style scoped>
