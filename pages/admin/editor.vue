@@ -100,8 +100,8 @@
 import { ref, onMounted } from "vue";
 
 definePageMeta({
-  layout: "default",
-  name: "default"
+  layout: "admin-layout",
+  name: "editor"
 });
   
 const supabase = useSupabaseClient();
