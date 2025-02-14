@@ -34,9 +34,12 @@
       </div>
 
       <ClientOnly>
-        <Quill v-model:content="body" />
+        <QuillEditor
+          :options="options"
+          content-type="html"
+          v-model:content="body"
+        />
       </ClientOnly>
-
       <div class="flex items-center gap-2 mt-4">
         <input
           type="checkbox"
@@ -124,15 +127,23 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 const supabase = useSupabaseClient();
+
+const title = ref("");
+const description = ref("");
+const body = ref("");
+const loading = ref(false);
 const isFeatured = ref(false);
 const headerImageUrl = ref("");
 const imageLoading = ref(false);
-// const categories = ref(["Technology", "Fashion", "Business", "Finance", "Sports", "Health", "Politics"]);
-const categories = ref([]); // Fetch categories from API
+const categories = ref([{ id: 1, name: "Technology" }]); // Fetch categories from API
 const newCategory = ref("");
 const showInput = ref(false);
 const currCategory = ref(null); // Store selected category object
+
 // Fetch Categories on Page Load
 const fetchCategories = async () => {
   try {
@@ -143,32 +154,35 @@ const fetchCategories = async () => {
     console.error("Error fetching categories:", error.message);
   }
 };
+
 // Upload Image to Supabase Storage
 const uploadImage = async (event) => {
   const file = event.target.files[0];
   if (!file) return;
-  imageLoading.value = true; // Start loading state
+
   imageLoading.value = true;
+
   const { data, error } = await supabase.storage
     .from("articlesImage")
     .upload(`headers/${file.name}`, file, {
       cacheControl: "3600",
       upsert: true,
     });
+
   if (error) {
     console.error("Upload error:", error);
     alert("Failed to upload image");
     imageLoading.value = false;
     return;
   }
-  // Get the public URL
+
   // Get Public URL
   const { data: publicUrlData } = supabase.storage
     .from("articlesImage")
     .getPublicUrl(data.path);
   headerImageUrl.value = publicUrlData.publicUrl;
+
   alert("✅ Image uploaded successfully!");
-  imageLoading.value = false; // Stop loading state
   imageLoading.value = false;
 };
 
@@ -176,12 +190,14 @@ const uploadImage = async (event) => {
 const addCategory = async () => {
   const trimmedCategory = newCategory.value.trim();
   if (!trimmedCategory) return;
+
   try {
     const { data, error } = await supabase
       .from("categories")
       .insert([{ name: trimmedCategory }])
       .select("*")
       .single();
+
     if (error) throw error;
 
     categories.value.push(data);
@@ -192,17 +208,24 @@ const addCategory = async () => {
     alert("Failed to add category.");
   }
 };
+
 // Set Selected Category
 const setCategory = (category) => {
   currCategory.value = category;
   console.log("Selected Category:", category);
 };
+
 // Submit Article
 const addArticle = async () => {
+  console.log("----addArticle------");
+  console.log("----title------", title.value);
+  console.log("----body------", body.value);
+  console.log("----currCategory------", currCategory.value);
   if (!title.value.trim() || !body.value.trim() || !currCategory.value) {
     alert("Title, content, and category are required!");
     return;
   }
+
   loading.value = true;
   try {
     const { data, error } = await supabase.from("article").insert([
@@ -212,12 +235,13 @@ const addArticle = async () => {
         content: body.value,
         is_featured: isFeatured.value,
         header_image: headerImageUrl.value,
-
         category_id: currCategory.value.id,
         active: true,
       },
     ]);
+
     if (error) throw error;
+
     alert("✅ Article added successfully!");
     title.value = "";
     description.value = "";
@@ -232,6 +256,34 @@ const addArticle = async () => {
     loading.value = false;
   }
 };
+
+const toolbarOptions = [
+  ["bold", "italic", "underline", "strike"], // toggled buttons
+  ["blockquote", "code-block"],
+  [{ header: 1 }, { header: 2 }], // custom button values
+  [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+  [{ script: "sub" }, { script: "super" }], // superscript/subscript
+  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  [{ direction: "rtl" }], // text direction
+  [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+  [{ align: [] }],
+  ["image", "link", "video", "formula"], // Ensure this is correctly placed
+  ["clean"], // remove formatting button
+];
+
+const options = ref({
+  modules: {
+    // FIXED: changed from "module" to "modules"
+    toolbar: toolbarOptions,
+  },
+  placeholder: "Compose Here.....",
+  readonly: false,
+  theme: "snow",
+});
+
 // Fetch categories when the component is mounted
 onMounted(fetchCategories);
 </script>
