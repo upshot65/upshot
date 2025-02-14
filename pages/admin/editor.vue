@@ -27,9 +27,9 @@
         <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">✅ Image uploaded successfully!</p>
       </div>
       
-      <ClientOnly>
-        <Quill v-model:content="body" />
-      </ClientOnly>
+     <!--  <ClientOnly>
+      <Quill v-model:content="body" />
+    //  </ClientOnly> -->
 
       <div class="flex items-center gap-2 mt-4">
         <input type="checkbox" v-model="isFeatured" id="featured" class="w-4 h-4" />
