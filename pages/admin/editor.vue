@@ -99,6 +99,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Quill from "~/components/Quill.vue";
+import { useSupabaseClient } from "@nuxtjs/supabase";
 const supabase = useSupabaseClient();
 
 const title = ref("");
