@@ -8,7 +8,8 @@ const content = computed(() => {
 });
 
   definePageMeta({
-  layout: "default", // ✅ Use the default layout
+  layout: "default",
+  name: "default"
 });
   
 useHead({
