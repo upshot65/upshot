@@ -1,135 +1,7 @@
-<template>
-  <div class="flex h-full gap-6 p-6 max-w-7xl mx-auto">
-    <!-- Editor Section -->
-    <section class="w-2/3 p-4 pt-0 h-full rounded-lg bg-white shadow-sm">
-      <input
-        v-model="title"
-        type="text"
-        placeholder="Enter article title"
-        class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <textarea
-        v-model="description"
-        placeholder="Enter article description..."
-        class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      ></textarea>
-
-      <!-- Header Image Upload -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium mb-2"
-          >Upload Header Image</label
-        >
-        <input
-          type="file"
-          @change="uploadImage"
-          :disabled="imageLoading"
-          class="w-full p-2 border border-gray-300 rounded-md cursor-pointer disabled:opacity-50"
-        />
-        <p v-if="imageLoading" class="text-sm text-blue-500 mt-2">
-          Uploading image...
-        </p>
-        <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">
-          ✅ Image uploaded successfully!
-        </p>
-      </div>
-
-      <ClientOnly>
-        <QuillEditor
-          :options="options"
-          content-type="html"
-          v-model:content="body"
-        />
-      </ClientOnly>
-      <div class="flex items-center gap-2 mt-4">
-        <input
-          type="checkbox"
-          v-model="isFeatured"
-          id="featured"
-          class="w-4 h-4"
-        />
-        <label for="featured" class="text-sm font-medium"
-          >Mark as Featured</label
-        >
-        <!-- Show selected category -->
-
-        <span
-          v-if="currCategory"
-          class="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-sm"
-        >
-          Category --> {{ currCategory.name }}
-        </span>
-      </div>
-
-      <div class="flex gap-3 mt-6">
-        <button
-          @click="addArticle"
-          :disabled="loading"
-          class="px-5 py-2 rounded-full font-semibold transition-colors"
-          :class="
-            loading
-              ? 'bg-gray-500 text-white'
-              : 'bg-blue-600 text-white hover:bg-blue-800'
-          "
-        >
-          {{ loading ? "Submitting..." : "Publish" }}
-        </button>
-        <button
-          class="px-5 py-2 rounded-full bg-gray-200 text-black font-semibold"
-        >
-          Save Draft
-        </button>
-      </div>
-    </section>
-
-    <!-- Sidebar Section -->
-    <aside
-      class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm"
-    >
-      <h2 class="text-lg font-semibold mb-3">Select Category</h2>
-      <div class="flex flex-wrap gap-2">
-        <span
-          v-for="category in categories"
-          :key="category.id"
-          class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
-          :class="{ 'bg-green-600 text-white': currCategory === category.name }"
-          @click="setCategory(category)"
-        >
-          {{ category.name }}
-        </span>
-
-        <button
-          @click="showInput = true"
-          v-if="!showInput"
-          class="px-3 py-1 border border-gray-400 rounded-full"
-        >
-          Add new +
-        </button>
-
-        <input
-          v-if="showInput"
-          v-model="newCategory"
-          @keyup.enter="addCategory"
-          @blur="addCategory"
-          type="text"
-          placeholder="Enter category"
-          class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
-        />
-      </div>
-      <h2 class="text-lg font-semibold mt-6">Add tags</h2>
-      <input
-        type="text"
-        placeholder="Add up to 3 tags..."
-        class="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-      />
-    </aside>
-  </div>
-</template>
-
 <script setup>
-import { ref, onMounted } from "vue";
+import TinyMCEEditor from "~/components/TinyMCEEditor.vue";
 
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import { ref, onMounted } from "vue";
 const supabase = useSupabaseClient();
 
 const title = ref("");
@@ -257,39 +129,134 @@ const addArticle = async () => {
   }
 };
 
-const toolbarOptions = [
-  ["bold", "italic", "underline", "strike"], // toggled buttons
-  ["blockquote", "code-block"],
-  [{ header: 1 }, { header: 2 }], // custom button values
-  [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-  [{ script: "sub" }, { script: "super" }], // superscript/subscript
-  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-  [{ direction: "rtl" }], // text direction
-  [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-  [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-  [{ font: [] }],
-  [{ align: [] }],
-  ["image", "link", "video", "formula"], // Ensure this is correctly placed
-  ["clean"], // remove formatting button
-];
-
-const options = ref({
-  modules: {
-    // FIXED: changed from "module" to "modules"
-    toolbar: toolbarOptions,
-  },
-  placeholder: "Compose Here.....",
-  readonly: false,
-  theme: "snow",
-});
-
 // Fetch categories when the component is mounted
 onMounted(fetchCategories);
 </script>
 
-<style scoped>
-body {
-  background-color: #f8f9fa;
-}
-</style>
+<template>
+  <div class="container mx-auto p-6">
+    <h1 class="text-xl font-bold mb-4">Upshot Edtior</h1>
+    <div class="flex h-full gap-6 p-6 max-w-7xl mx-auto">
+      <!-- Editor Section -->
+      <section class="w-2/3 p-4 pt-0 h-full rounded-lg bg-white shadow-sm">
+        <input
+          v-model="title"
+          type="text"
+          placeholder="Enter article title"
+          class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <textarea
+          v-model="description"
+          placeholder="Enter article description..."
+          class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+
+        <!-- Header Image Upload -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-2"
+            >Upload Header Image</label
+          >
+          <input
+            type="file"
+            @change="uploadImage"
+            :disabled="imageLoading"
+            class="w-full p-2 border border-gray-300 rounded-md cursor-pointer disabled:opacity-50"
+          />
+          <p v-if="imageLoading" class="text-sm text-blue-500 mt-2">
+            Uploading image...
+          </p>
+          <p v-if="headerImageUrl" class="text-sm text-green-500 mt-2">
+            ✅ Image uploaded successfully!
+          </p>
+        </div>
+
+        <ClientOnly>
+          <TinyMCEEditor v-model="body" />
+        </ClientOnly>
+        <div class="flex items-center gap-2 mt-4">
+          <input
+            type="checkbox"
+            v-model="isFeatured"
+            id="featured"
+            class="w-4 h-4"
+          />
+          <label for="featured" class="text-sm font-medium"
+            >Mark as Featured</label
+          >
+          <!-- Show selected category -->
+
+          <span
+            v-if="currCategory"
+            class="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-sm"
+          >
+            Category --> {{ currCategory.name }}
+          </span>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button
+            @click="addArticle"
+            :disabled="loading"
+            class="px-5 py-2 rounded-full font-semibold transition-colors"
+            :class="
+              loading
+                ? 'bg-gray-500 text-white'
+                : 'bg-blue-600 text-white hover:bg-blue-800'
+            "
+          >
+            {{ loading ? "Submitting..." : "Publish" }}
+          </button>
+          <button
+            class="px-5 py-2 rounded-full bg-gray-200 text-black font-semibold"
+          >
+            Save Draft
+          </button>
+        </div>
+      </section>
+
+      <!-- Sidebar Section -->
+      <aside
+        class="w-1/3 p-4 border border-gray-300 rounded-lg bg-white shadow-sm"
+      >
+        <h2 class="text-lg font-semibold mb-3">Select Category</h2>
+        <div class="flex flex-wrap gap-2">
+          <span
+            v-for="category in categories"
+            :key="category.id"
+            class="px-3 py-1 bg-[#B9DB32] text-black rounded-full cursor-pointer hover:bg-green-400"
+            :class="{
+              'bg-green-600 text-white': currCategory === category.name,
+            }"
+            @click="setCategory(category)"
+          >
+            {{ category.name }}
+          </span>
+
+          <button
+            @click="showInput = true"
+            v-if="!showInput"
+            class="px-3 py-1 border border-gray-400 rounded-full"
+          >
+            Add new +
+          </button>
+
+          <input
+            v-if="showInput"
+            v-model="newCategory"
+            @keyup.enter="addCategory"
+            @blur="addCategory"
+            type="text"
+            placeholder="Enter category"
+            class="px-3 py-1 border border-gray-400 rounded-full focus:outline-none"
+          />
+        </div>
+        <h2 class="text-lg font-semibold mt-6">Add tags</h2>
+        <input
+          type="text"
+          placeholder="Add up to 3 tags..."
+          class="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </aside>
+    </div>
+  </div>
+</template>
