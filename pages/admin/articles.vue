@@ -38,6 +38,15 @@
             >
               Edit
             </NuxtLink>
+
+            <NuxtLink
+              :to="`/articles/${article.id}-${generateSlug(article.title)}`"
+              class="px-4 py-2 bg-pink-500 hover:bg-gray-700 text-white rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Article
+            </NuxtLink>
           </td>
         </tr>
       </tbody>
@@ -67,6 +76,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useFetch } from "#app";
+const supabase = useSupabaseClient();
+const { generateSlug } = useSlug();
 
 const articles = ref();
 const page = ref(1);
@@ -113,17 +124,27 @@ const nextPage = async () => {
 };
 
 const togglePublish = async (article) => {
-  const updatedStatus = !article.active;
-  const { error } = await useFetch(`/api/articles/${article.id}/publish`, {
-    method: "PATCH",
-    body: JSON.stringify({ active: updatedStatus }),
-    headers: { "Content-Type": "application/json" },
-  });
+  console.log("--article--", article);
 
-  if (error.value) {
+  const updatedStatus = !article.active;
+  console.log("--updatedStatus--", updatedStatus);
+  const { error } = await supabase
+    .from("article")
+    .update({
+      active: updatedStatus,
+    })
+    .eq("id", article.id);
+  //   const { error } = await useFetch(`/api/articles/${article.id}/publish`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify({ active: updatedStatus }),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+
+  if (error) {
     alert("Failed to update article status");
   } else {
     article.active = updatedStatus; // Update locally
+    alert("article updated successfully");
   }
 };
 
