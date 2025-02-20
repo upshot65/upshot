@@ -3,7 +3,9 @@ import TinyMCEEditor from "~/components/TinyMCEEditor.vue";
 
 import { ref, onMounted } from "vue";
 const supabase = useSupabaseClient();
-
+definePageMeta({
+  middleware: "auth", // Matches `middleware/auth.ts`
+});
 const title = ref("");
 const description = ref("");
 const body = ref("");
