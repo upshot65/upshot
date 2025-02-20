@@ -94,13 +94,19 @@
           Create Account
         </button>
       </form>
+
+      <NuxtLink
+        to="/login"
+        class="w-full py-3 rounded-full bg-black text-white font-semibold hover:bg-gray-800 transition-colors mt-30"
+        >Already Have a account sign In here</NuxtLink
+      >
     </div>
   </div>
 </template>
 
 <script setup>
 import { z } from "zod";
-
+const supabase = useSupabaseClient();
 const form = ref({
   name: "",
   email: "",
@@ -156,31 +162,38 @@ const emit = defineEmits(["accountCreated"]);
 async function handleSubmit() {
   if (!validateForm()) return;
   console.log("----form-----", form.value);
-  // Use useFetch to call the /api/register API
-  const response = await $fetch("/api/register", {
-    method: "POST",
-    body: form.value,
+
+  const { data, error } = await supabase.auth.signUp({
+    email: form.value.email,
+    password: form.value.password,
+    options: {
+      data: { name: form.value.name }, // ✅ Works in Supabase v1
+    },
   });
 
+  console.log("--error---", error);
+  console.log("--data---", data);
+  if (error) throw error;
+  alert("check your email to confirm your account");
   form.value.name = null;
   form.value.email = null;
   form.value.password = null;
   form.value.confirmPassword = null;
-  console.log("----api response-----", response);
+  console.log("----data response-----", data);
 
-  if (response.statusCode == 500) {
-    if (response.body.code == "23505") {
-      alert("this email already exist ");
-    } else {
-      alert("Failed to create account: ");
-    }
-  } else {
-    // Emit the event if account creation is successful
-    emit("accountCreated");
+  // if (response.statusCode == 500) {
+  //   if (response.body.code == "23505") {
+  //     alert("this email already exist ");
+  //   } else {
+  //     alert("Failed to create account: ");
+  //   }
+  // } else {
+  //   // Emit the event if account creation is successful
+  //   emit("accountCreated");
 
-    userId.value = response.body.userId;
-    // alert("Account created successfully");
-  }
+  //   userId.value = response.body.userId;
+  //   // alert("Account created successfully");
+  // }
 }
 </script>
 
