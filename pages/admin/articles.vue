@@ -79,6 +79,9 @@ import { useFetch } from "#app";
 const supabase = useSupabaseClient();
 const { generateSlug } = useSlug();
 
+  definePageMeta({
+  middleware: "auth", // Matches `middleware/auth.ts`
+});
 const articles = ref();
 const page = ref(1);
 const pageSize = ref(10);
