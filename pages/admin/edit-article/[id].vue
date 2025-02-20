@@ -3,6 +3,11 @@ import TinyMCEEditor from "~/components/TinyMCEEditor.vue";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
+  definePageMeta({
+  middleware: "auth", // Matches `middleware/auth.ts`
+});
+
+  
 const supabase = useSupabaseClient();
 const route = useRoute();
 const router = useRouter();
