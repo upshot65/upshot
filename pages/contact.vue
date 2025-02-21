@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto py-10 px-4">
     <h1 class="text-4xl font-bold text-center mb-4">Contact us</h1>
     <p class="text-center text-gray-600 mb-8">
-      AAny question or remarks? Just write us a message!
+      Any question or remarks? Just write us a message!
     </p>
 
     <div class="grid grid-cols-1 mt-14 lg:grid-cols-2 mx-[80px] gap-8 !content-center">
