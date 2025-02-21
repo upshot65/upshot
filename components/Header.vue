@@ -118,8 +118,8 @@
                   </svg>
                 </div>
                 <div>
-                  <div class="font-medium">Ajay Gupta</div>
-                  <div class="text-sm text-gray-500">ajay@xyz.com</div>
+                  <div class="font-medium">{{ user.user_metadata.name }}</div>
+                  <div class="text-sm text-gray-500">{{ user.email }}</div>
                 </div>
               </div>
             </div>
@@ -272,6 +272,9 @@
 const isMobileMenuOpen = ref(false);
 const isProfileMenuOpen = ref(false);
 const supabase = useSupabaseClient();
+const router = useRouter();
+const user = useSupabaseUser();
+console.log("--user--", user.value.user_metadata);
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
   if (isMobileMenuOpen.value) {
@@ -280,9 +283,14 @@ const toggleMobileMenu = () => {
 };
 
 const toggleProfileMenu = () => {
-  isProfileMenuOpen.value = !isProfileMenuOpen.value;
-  if (isProfileMenuOpen.value) {
+  if (user.value) {
+    isProfileMenuOpen.value = !isProfileMenuOpen.value;
+    if (isProfileMenuOpen.value) {
+      isMobileMenuOpen.value = false;
+    }
+  } else {
     isMobileMenuOpen.value = false;
+    router.push("/login");
   }
 };
 
@@ -304,7 +312,6 @@ onMounted(() => {
 
 import { debounce } from "lodash-es";
 
-const router = useRouter();
 const route = useRoute();
 const searchQuery = ref("");
 
