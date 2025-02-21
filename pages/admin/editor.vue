@@ -137,7 +137,7 @@ onMounted(fetchCategories);
 
 <template>
   <div class="container mx-auto p-6">
-    <h1 class="text-xl font-bold mb-4">Upshot Edtior</h1>
+    <h1 class="text-xl font-bold mb-4">Upshot Editor</h1>
     <div class="flex h-full gap-6 p-6 max-w-7xl mx-auto">
       <!-- Editor Section -->
       <section class="w-2/3 p-4 pt-0 h-full rounded-lg bg-white shadow-sm">
