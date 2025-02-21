@@ -62,6 +62,8 @@ export default defineNuxtConfig({
     // Server-side only
     user: process.env.EMAIL_USER, // Email is now taken from environment variables
     pass: process.env.EMAIL_PASS, // Password is now taken from environment variables
+     mailChimpKey: process.env.MAIL_CHIMP,
+    audienceId: process.env.AUDIENCE_ID,
     // Exposed to client and server
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
