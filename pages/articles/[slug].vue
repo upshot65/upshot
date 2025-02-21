@@ -173,7 +173,7 @@ const toggleLike = async () => {
 
     if (!error) {
       isLiked.value = false;
-      likeCount.value = likeCount.value - 1;
+      likeCount.value = Number(likeCount.value) - 1;
       console.log("--likeCount--", likeCount.value);
     } else {
       console.error("Error unliking article:", error.message);
@@ -187,7 +187,7 @@ const toggleLike = async () => {
 
     if (!error) {
       isLiked.value = true;
-      likeCount.value = likeCount.value + 1;
+      likeCount.value = Number(likeCount.value) + 1;
       console.log("--likeCount--", likeCount.value);
     } else {
       console.error("Error liking article:", error.message);
