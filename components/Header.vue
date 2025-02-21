@@ -274,7 +274,7 @@ const isProfileMenuOpen = ref(false);
 const supabase = useSupabaseClient();
 const router = useRouter();
 const user = useSupabaseUser();
-console.log("--user--", user.value.user_metadata);
+
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
   if (isMobileMenuOpen.value) {
