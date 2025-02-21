@@ -190,7 +190,10 @@ const toggleLike = async () => {
     if (!error) {
       isLiked.value = true;
       console.log("--likeCount--", typeof likeCount.value);
-       likeCount.value += 1;
+      if (!likeCount.value) {
+        likeCount.value = 0;
+      }
+      likeCount.value += 1;
       console.log("--likeCount--", typeof likeCount.value);
       console.log("--likeCount--", likeCount.value);
     } else {
