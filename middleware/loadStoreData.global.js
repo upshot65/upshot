@@ -1,4 +1,4 @@
-// middleware/loadStoreData.global.ts
+// middleware/loa dStoreData.global.ts
 import { useArticleStore } from "~/stores/articles"; // Import your Pinia store
 import { storeToRefs } from "pinia";
 
