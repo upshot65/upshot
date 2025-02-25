@@ -34,6 +34,7 @@
             <input
               type="email"
               id="email"
+              v-model="form.email"
               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-full"
               required
             />
@@ -47,6 +48,7 @@
             <input
               type="password"
               id="password"
+              v-model="form.password"
               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-full"
               required
             />
@@ -69,7 +71,10 @@
 
         <p class="text-center text-gray-600 mt-4">
           Don’t have an account?
-          <a href="#" class="text-indigo-600">Create free account</a>
+
+          <NuxtLink to="/signup" class="text-indigo-600"
+            >Create free account</NuxtLink
+          >
         </p>
       </div>
     </div>
@@ -77,8 +82,56 @@
 </template>
 
 <script setup>
-function handleSignIn() {
+const router = useRouter();
+const route = useRoute();
+import { z } from "zod";
+const supabase = useSupabaseClient();
+const form = ref({
+  email: "",
+  password: "",
+});
+
+const errors = ref({});
+
+const schema = z.object({
+  email: z.string().email({ message: "Must be a valid email address" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" }),
+});
+
+function validateForm() {
+  try {
+    schema.parse(form.value);
+    errors.value = {};
+    return true;
+  } catch (validationError) {
+    errors.value = validationError.errors.reduce((acc, err) => {
+      acc[err.path[0]] = err.message;
+      return acc;
+    }, {});
+    return false;
+  }
+}
+
+async function handleSignIn() {
+  console.log("------form.value-----", form.value);
+  if (!validateForm()) {
+    return;
+  }
   // Add your login functionality here
+  const { error } = await supabase.auth.signInWithPassword({
+    email: form.value.email,
+    password: form.value.password,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  // Get redirect path or fallback to home page
+  const redirectPath = route.query.redirect || "/";
+  router.push(redirectPath);
   console.log("done");
 }
 </script>

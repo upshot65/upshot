@@ -21,6 +21,7 @@
     "@vueuse/core": "^11.2.0",
     "aos": "^2.3.4",
     "bcryptjs": "^2.4.3",
+    "axios": "^1.7.9",
     "lodash-es": "^4.17.21",
     "nodemailer": "^6.9.16",
     "nuxt": "^3.13.0",
