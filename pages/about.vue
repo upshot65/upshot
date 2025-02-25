@@ -26,6 +26,29 @@
       </div>
     </section>
 
+<section class="py-16">
+  <h2 class="text-[42px] mb-[40px] font-semibold text-center">Our Clients</h2>
+  <div class="grid grid-cols-2 gap-4 w-full mx-auto">
+    <div class="p-4 border border-[#AFAFAF] max-w-[520px] rounded-[20px] text-center">
+      <p class="text-[62px]">50+</p>
+      <p class="text-black text-[28px]">Activations</p>
+    </div>
+    <div class="p-4 border border-[#AFAFAF] max-w-[520px] rounded-[20px] text-center">
+      <p class="text-[62px]">5000+</p>
+      <p class="text-black text-[28px]">TG Audience Connect</p>
+    </div>
+    <div class="p-4 rounded-[20px] mt-4 text-center bg-[#85B356] max-w-[520px] text-white transform rotate-[-5deg]">
+      <p class="text-[62px]">5</p>
+      <p class="text-white m-0 text-[28px]">Flagship Properties</p>
+    </div>
+    <div class="p-4 border py-6 border-[#AFAFAF] max-w-[520px] rounded-[20px] text-center">
+      <p class="text-[62px]">40k+</p>
+      <p class="text-black text-[28px]">Digital Impressions</p>
+    </div>
+  </div>
+</section>
+
+
  <!-- Team Carousel -->
     <section class="py-12 bg-white text-center">
       <div class="container mx-auto px-6">

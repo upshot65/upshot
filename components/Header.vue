@@ -37,10 +37,11 @@
       >Contact</NuxtLink>
 
       <NuxtLink
-        to="/portfolio"
-        class="nav-link text-blue-600 font-semibold"
-        :class="{ 'active': $route.path === '/portfolio' }"
-      >Portfolio</NuxtLink>
+      href="/path/to/your/mediakit.pdf"
+      download
+      class="nav-link text-blue-600 underline font-semibold"
+      :class="{ 'active': $route.path === '/portfolio' }"
+      >Media Kit</NuxtLink>
     </div>
   </div>
     <div class="flex justify-end items-center w-full">

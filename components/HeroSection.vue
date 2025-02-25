@@ -10,7 +10,7 @@
     <div class="grid max-h-[648px] overflow-hidden z-[30] relative layout-grid-banner grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 w-full mt-6 mx-auto justify-items-center">
       <div class="grid gap-3 w-full">
         <div v-for="(image, index) in leftColumn" :key="'left-' + index">
-          <img :src="image" 
+          <img :src="image" data-aos="fade-right"
             class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" 
             alt="Gallery Image" />
         </div>
@@ -18,25 +18,25 @@
 
       <div class="grid w-full gap-3 pt-[150px]">
         <div v-for="(image, index) in middleLeftColumn" :key="'middle-left-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid w-full gap-3 pt-[260px]">
         <div class="w-full" v-for="(image, index) in middleRightColumn" :key="'middle-right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
       <div class="grid gap-3 w-full pt-[150px]">
         <div v-for="(image, index) in rightColumn" :key="'right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
 
-      <div class="grid gap-3 w-full">
+      <div class="grid gap-3 w-full fade-left">
         <div v-for="(image, index) in lastColumn" :key="'right-' + index">
-          <img :src="image" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-left" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
         </div>
       </div>
     </div>
@@ -76,6 +76,22 @@ const lastColumn = ref([
   "/images/hero-gallery-7.png",
   "/images/hero-gallery-5.png",
 ]);
+
+
+import { onMounted } from 'vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+onMounted(() => {
+  AOS.init({
+    // You can customize AOS options here if needed
+    duration: 1000, // Animation duration
+    easing: 'ease-in-out', // Easing function
+    once: true, // Whether animation should happen only once - while scrolling down
+    mirror: false // Whether elements should animate out while scrolling past them
+  });
+});
+
 </script>
 
 <style scoped>

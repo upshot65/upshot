@@ -26,7 +26,7 @@
             <span>132 Dartmouth Street Boston,<br/> Massachusetts 02156 United States</span>
           </div>
         </div>
-        <div class="flex items-center  space-x-4 mt-4">
+        <!-- <div class="flex items-center  space-x-4 mt-4">
            <a
             href="category"
             aria-label="Twitter"
@@ -59,7 +59,7 @@
           >
             <i class="fab fa-linkedin text-white"></i>
           </a>
-        </div>
+        </div> -->
       </div>
 
       <!-- Contact Form -->
