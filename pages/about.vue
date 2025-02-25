@@ -64,8 +64,8 @@
           class="team-carousel"
         >
           <SwiperSlide v-for="(member, index) in team" :key="index">
-            <div class="bg-white rounded-lg p-6 text-left">
-              <img :src="member.image" :alt="member.name" class="w-full h-60 object-cover rounded-md mb-4" />
+            <div class="bg-white rounded-lg p-6 text-left mb-16">
+              <img :src="member.image" :alt="member.name" class="w-full h-full object-cover rounded-md mb-4" />
               <h3 class="text-lg font-semibold text-blue-600">{{ member.name }}</h3>
               <p class="text-gray-500 text-sm mb-2">{{ member.role }}</p>
               <p class="text-gray-600 text-xs">{{ member.description }}</p>
@@ -96,10 +96,11 @@ const items = [
 ];
 
 const team = [
-  { image: "/images/Moomal.jpg", name: "Moomal Sisodia", role: "Founder & CEO", description: "Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals" },
-  { image: "/images/Aditi-gupta.jpg", name: "Aditi Gupta", role: "Lead Advisor - Strategic Partnerships", description: "15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group" },
-  { image: "/images/Nisha.jpg", name: "Nisha Sharma", role: "Partner & Promoter", description: "M.Sc., M.Tech from NIT Kurukshetra" },
-  { image: "/images/Kavita-jhala.jpg", name: "Kavita SIngh", role: "Content Lead", description: "16+ yrs of Content building experience" },
+  { image: "/images/moomal-sisodia.png", name: "Moomal Sisodia", role: "Founder & CEO", description: "Image Consultant & Personal Branding Expert 8+ yrs in Brand Building including MP Police professionals" },
+  { image: "/images/aditi-gupta.png", name: "Aditi Gupta", role: "Lead Advisor - Strategic Partnerships", description: "15+ yrs experience in building Branded Content for Hotstar/ Star/ Zee Group" },
+  { image: "/images/yashi-kothari.png", name: "Yashi Kathari", role: "Partner & Promoter", description: "M.Sc., M.Tech from NIT Kurukshetra" },
+  { image: "/images/kavita-singh.png", name: "kavita-singh", role: "Content Lead", description: "16+ yrs of Content building experience" },
+  { image: "/images/nisha-sharma.png", name: "Nisha Sharma", role: "Partner & Promoter", description: "M.Sc, M.Tech from NIT Kurukshetra" },
 ];
 </script>
 
