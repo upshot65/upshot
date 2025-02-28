@@ -67,7 +67,7 @@ const addCategory = async () => {
 
   try {
     const { data, error } = await supabase
-      .from("categories")
+      .from("category")
       .insert([{ name: trimmedCategory }])
       .select("*")
       .single();
