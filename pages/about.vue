@@ -56,7 +56,7 @@
         <Swiper
           :slidesPerView="3"
           :spaceBetween="20"
-          :loop="true"
+          :loop="false"
           :pagination="{ clickable: true }"
           :navigation="true"
           :autoplay="{ delay: 3000 }"

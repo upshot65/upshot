@@ -35,9 +35,9 @@
       </div>
 
       <!-- Explore All Box -->
-      <div
-        v-if="showExploreAll"
-        @click="toggleShowAll"
+      <NuxtLink
+
+        to="/category"
         class="cursor-pointer flex flex-col items-center space-y-2"
       >
         <div
@@ -46,7 +46,7 @@
           Explore All
         </div>
         <p class="text-center text-blue-800 font-medium">Explore All</p>
-      </div>
+      </NuxtLink>
     </div>
 
     <!-- Remaining Categories -->

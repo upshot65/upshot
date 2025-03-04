@@ -11,7 +11,7 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex relative left-[45px] items-center space-x-6">
+        <div class="hidden md:flex relative left-[45px] items-center space-x-6 w-full">
           <NuxtLink
             to="/"
             class="nav-link"
@@ -41,6 +41,16 @@
           >
 
           <NuxtLink
+            to="/btl-highlights"
+            class="nav-link"
+            :class="{ active: $route.path === '/btl-highlights' }"
+            >Events</NuxtLink
+          >
+
+          <NuxtLink
+            to="/files/UBM Service Kit.pdf"
+            download
+            target="_blank"
             class="nav-link text-blue-600 underline font-semibold">Media Kit</NuxtLink
           >
         </div>

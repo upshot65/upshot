@@ -4,87 +4,53 @@
       <!-- Category Header with Image and Category List -->
       <!-- Category Header with Image and Category List Overlayed -->
       <section class="relative mb-8 rounded-lg overflow-hidden">
-  <!-- Category Image -->
-  <NuxtImg
-    :src="selectedCategory?.image_url"
-    alt="Category Image"
-    class="w-full h-[500px] object-cover"  
-  />
+        <!-- Category Image -->
+        <NuxtImg :src="selectedCategory?.image_url" alt="Category Image" class="w-full h-[500px] object-cover" />
 
-  <!-- Category List Overlay -->
-  <div
-    class="absolute pb-8 inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/60 to-transparent p-4"
-  >
-    <div
-      class="flex gap-5 overflow-x-auto whitespace-nowrap scrollbar-hide"
-      ref="categoryScroll"
-    >
-      <button
-        v-for="cat in categoriesWithLatest"
-        :key="cat?.category.id"
-        @click="selectCategory(cat?.category)"
-        :class="[
-          'px-9 bg-[#B9DB32] text-black py-3 rounded-full text-sm font-medium',
-          selectedCategory?.id === cat.category.id
-            ? ''
-            : '',
-        ]"
-      >
-        {{ cat.category.name }}
-      </button>
-    </div>
+        <!-- Category List Overlay -->
+        <div
+          class="absolute pb-8 inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-black/60 to-transparent p-4">
+          <div class="flex gap-5 overflow-x-auto whitespace-nowrap scrollbar-hide" ref="categoryScroll">
+            <button v-for="cat in categoriesWithLatest" :key="cat?.category.id" @click="selectCategory(cat?.category)"
+              :class="[
+                'px-9 py-3 rounded-full text-sm font-medium',
+                selectedCategory?.id === cat.category.id ? 'bg-[#000] text-white' : 'bg-[#B9DB32] text-black',
+              ]">
+              {{ cat.category.name }}
+            </button>
+          </div>
 
-    <!-- Arrow Button -->
-    <div class="ml-3 flex items-center">
-      <button class="w-8 h-8 flex justify-center items-center bg-[#B9DB32] rounded-full">
-        <NuxtImg src="/images/category-menu-arrow.svg" alt="Next" class="w-2" />
-      </button>
-    </div>
-  </div>
-</section>
+          <!-- Arrow Button -->
+          <div class="ml-3 flex items-center">
+            <button class="w-8 h-8 flex justify-center items-center bg-[#B9DB32] rounded-full" @click="scrollNext">
+              <NuxtImg src="/images/category-menu-arrow.svg" alt="Next" class="w-2" />
+            </button>
+          </div>
+        </div>
+      </section>
 
 
       <!-- Articles List -->
       <section v-if="!isLoading" class="space-y-6 mt-16">
-        <ArticleCard
-          v-for="article in getArticlesByCategory(selectedCategory?.id)"
-          :key="article.id"
-          :image="article.header_image"
-          :title="article.title"
-          :description="article.description"
-          :datePosted="article.created_at"
-          :articleId="article.id"
-        />
+        <ArticleCard v-for="article in getArticlesByCategory(selectedCategory?.id)" :key="article.id"
+          :image="article.header_image" :title="article.title" :description="article.description"
+          :datePosted="article.created_at" :articleId="article.id" />
       </section>
 
       <!-- Loading State -->
       <div v-else class="text-center py-4">Loading...</div>
 
       <!-- Show More Button -->
-      <div
-        v-if="hasMoreArticles(selectedCategory?.id)"
-        class="flex justify-center mt-8"
-      >
-        <button
-          @click="loadMoreArticles"
-          class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
-          style="background-color: #004aac"
-        >
+      <div v-if="hasMoreArticles(selectedCategory?.id)" class="flex justify-center mt-8">
+        <button @click="loadMoreArticles" class="px-6 py-2 text-white rounded-3xl hover:bg-blue-600"
+          style="background-color: #004aac">
           Show More ^
         </button>
       </div>
     </div>
 
-    <NuxtImg
-      src="/images/green-star-right.png"
-      alt="Hero Background"
-      class="green-star-right-image"
-    />
-    <NuxtImg
-      src="/images/dark-green-star-left.png"
-      alt="Hero Background"
-      class="dark-green-star-left-image"
-    />
+    <NuxtImg src="/images/green-star-right.png" alt="Hero Background" class="green-star-right-image" />
+    <NuxtImg src="/images/dark-green-star-left.png" alt="Hero Background" class="dark-green-star-left-image" />
   </section>
 </template>
 
@@ -114,7 +80,7 @@ const selectedCategory = useState(
 
 selectedCategory.value = defaultCategory?.category;
 
-  if (query.value) {
+if (query.value) {
   selectedCategory.value = categoriesWithLatest.value?.find((cat) => {
     return cat?.category.id == query.value;
   })?.category;
@@ -173,12 +139,24 @@ const selectCategory = (category) => {
     articles.value = [];
   }
 };
+
+
+import { ref } from 'vue';
+
+const categoryScroll = ref(null);
+
+const scrollNext = () => {
+  if (categoryScroll.value) {
+    categoryScroll.value.scrollBy({ left: 200, behavior: 'smooth' });
+  }
+};
 </script>
 
 <style scoped>
 .category-section {
   position: relative;
 }
+
 .green-star-right-image {
   position: absolute;
   top: 30%;
@@ -187,6 +165,7 @@ const selectCategory = (category) => {
   width: 242px;
   object-fit: cover;
 }
+
 .dark-green-star-left-image {
   position: absolute;
   top: 70%;
@@ -195,6 +174,7 @@ const selectCategory = (category) => {
   width: 200px;
   object-fit: cover;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

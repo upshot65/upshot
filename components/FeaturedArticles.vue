@@ -55,48 +55,7 @@
           />
         </div>
 
-        <!-- Navigation Arrows -->
-        <!-- <button
-        v-show="canScrollPrev"
-        @click="prevSlide"
-        class="absolute left-0 top-1/2 -translate-y-1/2 translate-x-2 bg-white rounded-full p-2 shadow-lg z-10"
-        aria-label="Previous slide"
-      >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button> -->
 
-        <!-- <button
-        v-show="canScrollNext"
-        @click="nextSlide"
-        class="absolute right-0 top-1/2 -translate-y-1/2 -translate-x-2 bg-white rounded-full p-2 shadow-lg z-10"
-        aria-label="Next slide"
-      >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button> -->
       </div>
     </div>
     <NuxtImg
@@ -223,10 +182,10 @@ const updateCurrentDot = (position) => {
 
   .featured-image {
   display: inline-block;
-  /* Smooth transition for both hover in and out */
+  transition: transform 0.6s ease; /* Smooth transition for both hover in and out */
 }
 
 .featured-image:hover {
-/* Shrink the image */
+  transform: scale(1.1); /* Shrink the image */
 }
 </style>

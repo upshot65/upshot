@@ -153,7 +153,7 @@ const { latestArticles } = storeToRefs(articleStore);
   width: 100%;
   /* height: 100%; */
   object-fit: contain;
-  /* transform: scale(1.1); */
+  transform: scale(1.1);
   transition: transform 0.5s ease-in-out;
 }
 

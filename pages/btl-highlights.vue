@@ -28,7 +28,7 @@
                   <h3 class="text-xl font-bold text-gray-900 mb-2">{{ event.title }}</h3>
                   <p class="text-gray-600 text-sm">{{ event.date }}</p>
                   <p class="text-gray-600 text-sm line-clamp-2">{{ event.description }}</p>
-                  <button class="prebook-button">Pre-book</button>
+                  <button class="prebook-button">Inquiry Now</button>
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
                   <h3 class="text-xl font-bold text-gray-900 mb-2">{{ event.title }}</h3>
                   <p class="text-gray-600 text-sm">{{ event.date }}</p>
                   <p class="text-gray-600 text-sm line-clamp-2">{{ event.description }}</p>
-                  <button class="prebook-button">Pre-book</button>
+                  <button class="prebook-button">Inquiry Now</button>
                 </div>
               </div>
             </div>
@@ -110,7 +110,7 @@
                   <h3 class="text-xl font-bold text-gray-900 mb-2">{{ event.title }}</h3>
                   <p class="text-gray-600 text-sm">{{ event.date }}</p>
                   <p class="text-gray-600 text-sm line-clamp-2">{{ event.description }}</p>
-                  <button class="max-w-[162px] rounded-full prebook-button">Pre-book</button>
+                  <button class="max-w-[162px] rounded-full prebook-button">Inquiry Now</button>
                 </div>
               </div>
             </div>

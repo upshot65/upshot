@@ -6,7 +6,7 @@
     <NuxtImg
       :src="image"
       alt="Article Image"
-      class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-lg"
+      class="w-full md:w-96 h-48 md:h-52   object-cover rounded-lg"
     />
 
     <!-- Article Content (Clickable) -->
