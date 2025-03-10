@@ -1,6 +1,6 @@
 <template>
   <section class="category-section">
-    <div class="max-w-7xl mx-auto p-6">
+    <div class="max-w-7xl mx-auto p-0 md:p-6">
       <!-- Category Header with Image and Category List -->
       <!-- Category Header with Image and Category List Overlayed -->
       <section class="relative mb-8 rounded-lg overflow-hidden">

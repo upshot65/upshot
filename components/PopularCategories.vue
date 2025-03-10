@@ -80,23 +80,22 @@
         </p>
       </div>
     </div>
-    <div class="relative overflow-hidden cursor-pointer group w-fit">
-  <img src="/images/popular-main.png" alt="" class="transform transition duration-300 group-hover:scale-105" />
-  
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black opacity-50"></div>
-  
-  <div class="absolute bottom-0 left-[20px] text-white p-3 text-lg">
-    BTL Highlights
-  </div>
-  
-  <!-- Centered Events Button -->
-  <div class="absolute inset-0 flex items-center justify-center">
-    <NuxtLink to="./btl-highlights" class="bg-[#004AAC] text-white min-w-40 py-2 px-4 rounded-full shadow-lg hover:text-black hover:bg-gray-200 transition duration-300 custom-pulse">
-      Upcoming Events
-    </NuxtLink>
-  </div>
-</div>
+    <div class="relative overflow-hidden min-h-[300px] btl-bg cursor-pointer group w-fit">
+      
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black opacity-50"></div>
+      
+      <div class="absolute bottom-0 left-[20px] text-white p-3 text-lg">
+        BTL Highlights
+      </div>
+      
+      <!-- Centered Events Button -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <NuxtLink to="./btl-highlights" class="bg-[#004AAC] text-white min-w-40 py-2 px-4 rounded-full shadow-lg hover:text-black hover:bg-gray-200 transition duration-300 custom-pulse">
+          Upcoming Events
+        </NuxtLink>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -155,12 +154,22 @@ function selectCategory(category) {
 .custom-pulse {
   animation: custom-pulse 1s infinite;
 }
-
+.btl-bg {
+  background-image: url('/images/popular-main.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+}
 
 @media (max-width: 768px) {
   .category-image {
     width: 60px;
     height: 60px;
+  }
+  .btl-bg {
+    min-height: 300px;
   }
 }
 </style>

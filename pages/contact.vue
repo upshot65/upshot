@@ -5,21 +5,21 @@
       Any question or remarks? Just write us a message!
     </p>
 
-    <div class="grid grid-cols-1 mt-14 lg:grid-cols-2 mx-[80px] gap-8 !content-center">
+    <div class="grid grid-cols-1 mt-14 lg:grid-cols-2 lg:mx-[80px] mx-auto gap-8 !content-center">
       <!-- Contact Information -->
-      <div class="bg-blue-800 flex justify-between flex-col text-white max-w-[491px] max-h-[647px] rounded-lg p-6 space-y-4">
+      <div class="bg-blue-800 flex justify-between flex-col text-white max-w-full lg:max-w-[491px] max-h-[647px] rounded-lg p-6 space-y-4">
         <div>
-            <h2 class="text-[28px] font-semibold">Contact Information</h2>
+            <h2 class="text-[25px] md:text-[28px] font-semibold">Contact Information</h2>
             <p class="text-lg mt-2">Say something to start a live chat!</p>
         </div>
-        <div class="space-y-2 pt-[50px] pb-[70px]">
-          <div class="flex items-center space-x-4 !mb-[40px]">
+        <div class="space-y-2 pt-8 md:pt-[50px] pb-[70px]">
+          <div class="flex items-center space-x-4 !mb-5 md:!mb-[40px]">
             <img src="/images/phone.png" alt="" />
             <span>+91 8962429492</span>
           </div>
-          <div class="flex items-center space-x-4 !mb-[40px]">
+          <div class="flex items-center space-x-4 !mb-5 md:!mb-[40px]">
             <img src="/images/email.png" alt="" />
-            <span>contact@upshotbrandmedia.com</span>
+            <a href="mailto:contact@upshotbrandmedia.com" class="break-all whitespace-normal inline-block">contact@upshotbrandmedia.com</a>
           </div>
           <div class="flex items-center space-x-4">
             <img src="/images/location.png" alt="" />
@@ -111,7 +111,7 @@
         ></textarea>
         <button
           type="submit"
-          class="bg-[#011C2A] text-right ml-auto flex text-white px-8 py-2 rounded-md hover:bg-blue-700 w-full md:w-auto"
+          class="bg-[#011C2A] md:text-right ml-auto flex text-white px-8 py-2 rounded-md hover:bg-blue-700 w-full md:w-auto justify-center md:justify-normal"
         >
           Send Message
         </button>

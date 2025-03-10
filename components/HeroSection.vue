@@ -1,42 +1,42 @@
 <template>
   <div class="relative flex flex-col items-center mt-[-84px] z-[0] bg-white">
     <!-- Header Text -->
-    <h1 class="text-3xl md:text-[70px] top-[105px] font-serif banner-heading leading-[80px] font-bold text-black text-center z-10 relative">
+    <h1 class="lg:text-[60px] text-[40px] top-[105px] font-serif banner-heading leading-[1.1] font-bold text-black text-center z-10 relative after:w-full after:object-cover">
       Your daily dose of <br />
       insights, & stories
     </h1>
 
     <!-- Masonry Grid Layout -->
-    <div class="grid max-h-[648px] overflow-hidden z-[30] relative layout-grid-banner grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 w-full mt-6 mx-auto justify-items-center">
+    <div class="grid max-h-[648px] overflow-hidden z-[30] relative layout-grid-banner grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 w-full mt-6 mx-auto justify-items-center px-4 md:px-0">
       <div class="grid gap-3 w-full">
         <div v-for="(image, index) in leftColumn" :key="'left-' + index">
           <img :src="image" data-aos="fade-right"
-            class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" 
+            class="hover:scale-[1.05] transition-transform duration-300 z-10 w-full rounded-lg object-cover cursor-pointer max-w-full h-full" 
             alt="Gallery Image" />
         </div>
       </div>
 
-      <div class="grid w-full gap-3 pt-[150px]">
+      <div class="grid w-full gap-3 pt-0 md:pt-[150px]">
         <div v-for="(image, index) in middleLeftColumn" :key="'middle-left-' + index">
-          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 w-full rounded-lg object-cover cursor-pointer max-w-full h-full" alt="Gallery Image" />
         </div>
       </div>
 
-      <div class="grid w-full gap-3 pt-[260px]">
+      <div class="grid w-full gap-3 sm:pt-[160px] md:pt-[260px]">
         <div class="w-full" v-for="(image, index) in middleRightColumn" :key="'middle-right-' + index">
-          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 w-full rounded-lg object-cover cursor-pointer max-w-full h-full" alt="Gallery Image" />
         </div>
       </div>
 
-      <div class="grid gap-3 w-full pt-[150px]">
+      <div class="grid gap-3 w-full sm:pt-[80px] md:pt-[150px]">
         <div v-for="(image, index) in rightColumn" :key="'right-' + index">
-          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-down" class="hover:scale-[1.05] transition-transform duration-300 z-10 w-full rounded-lg object-cover cursor-pointer max-w-full h-full" alt="Gallery Image" />
         </div>
       </div>
 
-      <div class="grid gap-3 w-full fade-left">
+      <div class="grid gap-3 w-full">
         <div v-for="(image, index) in lastColumn" :key="'right-' + index">
-          <img :src="image" data-aos="fade-left" class="hover:scale-[1.05] transition-transform duration-300 z-10 h-auto max-w-full w-full rounded-lg object-cover cursor-pointer h-full w-full object-cover rounded-xl" alt="Gallery Image" />
+          <img :src="image" data-aos="fade-left" class="hover:scale-[1.05] transition-transform duration-300 z-10 w-full rounded-lg object-cover cursor-pointer max-w-full h-full" alt="Gallery Image" />
         </div>
       </div>
     </div>
@@ -111,10 +111,14 @@ img:hover {
     left: 0;
     right: 0;
     height: 280px;
+    height: 100%;
+    min-height: 100px;
     margin: 0 auto;
     top: 0;
     z-index: -3;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .layout-grid-banner::after{
   content: "";
@@ -127,5 +131,26 @@ img:hover {
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 0;
+}
+@media screen and (max-width: 1350px) {
+  .layout-grid-banner::after {
+    bottom: -57px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .layout-grid-banner {
+    margin-top: 180px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .layout-grid-banner::after {
+    bottom: -80px;
+  }
+  .layout-grid-banner {
+    margin-top: 130px;
+  }
+  .banner-heading br {
+    display: none;
+  }
 }
 </style>

@@ -11,7 +11,7 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex relative left-[45px] items-center space-x-6 w-full">
+        <div class="hidden xl:flex relative left-[45px] items-center space-x-6 w-full">
           <NuxtLink
             to="/"
             class="nav-link"
@@ -57,13 +57,13 @@
       </div>
       <div class="flex justify-end items-center w-full">
         <!-- Search Bar - Visible on all screen sizes -->
-        <div class="flex flex-1 w-full justify-end items-center max-w-sm mx-4">
-          <div class="relative w-full">
+        <div class="flex flex-1 w-full justify-end items-center max-w-sm xl:max-w-full mx-4">
+          <div class="relative">
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Search Topics..."
-              class="w-[356px] pl-12 pr-4 py-3 rounded-full border border-[#D7D7D7] focus:outline-none bg-transparent placeholder:!text-[#49454F]"
+              class="xl:w-[356px] w-full pl-12 pr-4 py-3 rounded-full border border-[#D7D7D7] focus:outline-none bg-transparent placeholder:!text-[#49454F]"
             />
             <svg
               class="w-4 h-4 absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-500"
@@ -82,7 +82,7 @@
         </div>
 
         <!-- User Profile Dropdown - Desktop -->
-        <div class="hidden md:block relative">
+        <div class="hidden xl:block relative">
           <button
             @click="toggleProfileMenu"
             class="p-2 rounded-full hover:bg-gray-200 transition-colors flex items-center"
@@ -219,7 +219,7 @@
       </div>
       <!-- Mobile Menu Button -->
       <button
-        class="md:hidden p-2 rounded-lg hover:bg-gray-200 transition-colors ml-2"
+        class="xl:hidden p-2 rounded-lg hover:bg-gray-200 transition-colors ml-2"
         @click="toggleMobileMenu"
       >
         <svg
@@ -248,7 +248,7 @@
       <!-- Mobile Menu -->
       <div
         v-if="isMobileMenuOpen"
-        class="absolute top-16 right-4 w-48 bg-white rounded-lg shadow-lg py-2 md:hidden"
+        class="absolute top-16 right-4 w-48 bg-white rounded-lg shadow-lg py-2 xl:hidden"
       >
         <NuxtLink
           to="/"
@@ -256,7 +256,7 @@
           >Home</NuxtLink
         >
         <NuxtLink
-          to="/categories"
+          to="/category"
           class="block px-4 py-2 hover:bg-gray-100 transition-colors"
           >Categories</NuxtLink
         >
@@ -270,6 +270,19 @@
           class="block px-4 py-2 hover:bg-gray-100 transition-colors"
           >Contact</NuxtLink
         >
+        <NuxtLink
+            to="/btl-highlights"
+            class="block px-4 py-2 hover:bg-gray-100 transition-colors"
+            :class="{ active: $route.path === '/btl-highlights' }"
+            >Events</NuxtLink
+          >
+
+          <NuxtLink
+            to="/files/UBM Service Kit.pdf"
+            download
+            target="_blank"
+            class="block px-4 py-2 hover:bg-gray-100 transition-colors underline font-semibold">Media Kit</NuxtLink
+          >
       </div>
     </nav>
   </header>
